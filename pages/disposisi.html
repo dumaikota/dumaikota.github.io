@@ -4,22 +4,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Disposisi Surat - Kecamatan Dumai Kota</title>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.0.1/dist/tesseract.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
     body { font-family: Arial, sans-serif; background:#f8faf8; margin:0; padding:2rem; }
     h2 { color:#004b23; }
+    small { color:#555; font-style:italic; }
+    select, input, textarea, button { width:100%; padding:0.5rem; margin:0.3rem 0; border-radius:6px; border:1px solid #ccc; }
+    button { background:#004b23; color:white; border:none; cursor:pointer; }
+    button:hover { background:#007230; }
     table { width:100%; border-collapse:collapse; margin-top:1rem; }
     th, td { border:1px solid #ccc; padding:8px; text-align:left; }
     th { background:#e6f2e6; }
-    input, select, textarea { width:100%; padding:0.5rem; margin:0.3rem 0; border:1px solid #ccc; border-radius:6px; }
-    button { background:#004b23; color:white; border:none; padding:0.6rem 1rem; border-radius:6px; cursor:pointer; margin:0.3rem; }
-    button:hover { background:#007230; }
-    hr { margin:2rem 0; border:0; border-top:1px solid #ccc; }
-    #logoutBtn { background:#c62828; }
-    #logoutBtn:hover { background:#a31515; }
+    #uploadSection { display:none; margin-top:1rem; }
   </style>
 </head>
 <body>
   <h2>📨 Modul Disposisi Surat</h2>
+  <small>🧩 Versi v4 Hybrid Input – Manual | Gambar (OCR) | Srikandi (PDF)</small>
+
+  <label>Sumber Data Surat:</label>
+  <select id="inputMode">
+    <option value="manual">✍️ Input Manual</option>
+    <option value="gambar">🖼 Dari Gambar (OCR)</option>
+    <option value="srikandi">📄 Dari Srikandi (PDF)</option>
+  </select>
+
+  <div id="uploadSection">
+    <label>Upload Surat (JPG/PNG/PDF):</label>
+    <input type="file" id="fileUpload" accept=".jpg,.jpeg,.png,.pdf">
+    <button type="button" id="extractBtn">🔍 Ekstrak Data</button>
+    <p id="extractStatus"></p>
+  </div>
 
   <form id="disposisiForm">
     <label>No. Surat:</label>
@@ -39,32 +56,22 @@
       <option value="Rahasia">Rahasia</option>
     </select>
     <label>Diteruskan Kepada:</label>
-    <textarea id="tujuan" rows="2" placeholder="Pisahkan dengan koma (,) contoh: Sekcam, Kasi PM"></textarea>
+    <textarea id="tujuan" rows="2"></textarea>
     <label>Catatan Disposisi:</label>
     <textarea id="catatan" rows="3"></textarea>
     <button type="submit">📩 Simpan Disposisi</button>
   </form>
 
   <hr>
-
   <h3>📋 Daftar Disposisi</h3>
   <table id="disposisiTable">
     <thead>
       <tr>
-        <th>No. Surat</th>
-        <th>Tanggal</th>
-        <th>Perihal</th>
-        <th>Dari</th>
-        <th>Sifat</th>
-        <th>Tujuan</th>
-        <th>Catatan</th>
-        <th>Aksi</th>
+        <th>No. Surat</th><th>Tanggal</th><th>Perihal</th><th>Dari</th><th>Sifat</th><th>Tujuan</th><th>Catatan</th><th>Aksi</th>
       </tr>
     </thead>
     <tbody></tbody>
   </table>
-
-  <button id="logoutBtn">🚪 Logout</button>
 
   <script src="../js/disposisi.js"></script>
 </body>
