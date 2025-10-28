@@ -1,1 +1,33 @@
-<!DOCTYPE html><html><body><h2>Modul Disposisi Kecamatan Dumai Kota (v5.1 OCR Fix)</h2></body></html>
+<!DOCTYPE html>
+<html lang='id'>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Modul Disposisi Kecamatan Dumai Kota</title>
+<script src='https://cdn.jsdelivr.net/npm/tesseract.js@5.0.1/dist/tesseract.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'></script>
+<style>
+body{font-family:Arial;background:#f8faf8;margin:0;padding:20px}
+button{padding:8px 12px;border:none;border-radius:6px;margin:3px;cursor:pointer}
+.btn{background:#388e3c;color:#fff}.btn-home{background:#1976d2}.btn-del{background:#d32f2f}
+textarea,input,select{width:100%;padding:6px;margin:4px 0;border:1px solid #ccc;border-radius:5px}
+table{width:100%;border-collapse:collapse;margin-top:10px}th,td{border:1px solid #ccc;padding:6px}
+</style></head><body>
+<h2>🏛️ Modul Disposisi Kecamatan Dumai Kota (v5.1 OCR Fix)</h2>
+<div id='toolbar'>
+<button class='btn-home' onclick="window.location.href='../index.html'">🏠 Beranda</button>
+<button class='btn' onclick='printAllDisposisi()'>🗂 Cetak Semua</button>
+</div>
+<select id='inputMode'><option value='manual'>✍️ Manual</option><option value='gambar'>🖼 Gambar (OCR)</option><option value='srikandi'>📄 PDF (Srikandi)</option></select>
+<div id='uploadSection' style='display:none'>
+<input type='file' id='fileUpload'><button id='extractBtn'>🔍 Ekstrak Data</button>
+<p id='extractStatus'></p><textarea id='ocrPreview' rows='4' placeholder='Hasil OCR...'></textarea>
+</div>
+<form id='disposisiForm'>
+<input id='noSurat' placeholder='No. Surat' required><input id='tanggalSurat' type='date' required>
+<input id='dari' placeholder='Asal Surat' required><input id='perihal' placeholder='Perihal' required>
+<select id='sifat'><option>Biasa</option><option>Segera</option><option>Penting</option><option>Sangat Penting</option><option>Rahasia</option></select>
+<textarea id='tujuan' rows='2' placeholder='Diteruskan Kepada...'></textarea><textarea id='catatan' rows='2' placeholder='Catatan...'></textarea>
+<button class='btn' type='submit'>📩 Simpan</button></form>
+<table id='disposisiTable'><thead><tr><th>No</th><th>Tgl</th><th>Perihal</th><th>Dari</th><th>Sifat</th><th>Tujuan</th><th>Catatan</th><th>Aksi</th></tr></thead><tbody></tbody></table>
+<script src='../js/disposisi.js'></script></body></html>
