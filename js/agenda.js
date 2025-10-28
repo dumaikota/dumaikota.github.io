@@ -1,4 +1,4 @@
-// Modul Agenda Harian Pejabat - Versi 2 (WA Format Update)
+// Modul Agenda Harian Pejabat - Versi 3 (Final Format WA)
 const form = document.getElementById('agendaForm');
 const tableBody = document.querySelector('#agendaTable tbody');
 const copyBtn = document.getElementById('copyWA');
@@ -6,13 +6,13 @@ const printBtn = document.getElementById('printPDF');
 
 let agendaList = JSON.parse(localStorage.getItem('agendaList')) || [];
 
-// Render tabel
+// Render tabel agenda
 function renderTable() {
   tableBody.innerHTML = '';
   agendaList.forEach((item, index) => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td>${item.tanggal}</td>
+      <td>${item.tanggal || '-'}</td>
       <td>${item.pukul || '-'}</td>
       <td>${item.acara || '-'}</td>
       <td>${item.lokasi || '-'}</td>
@@ -30,7 +30,7 @@ function deleteAgenda(i) {
   renderTable();
 }
 
-// Tambah agenda
+// Tambah agenda baru
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const data = {
@@ -46,22 +46,32 @@ form.addEventListener('submit', (e) => {
   renderTable();
 });
 
-// Salin ke WA semua agenda hari ini
+// Salin ke WhatsApp (format final)
 copyBtn.addEventListener('click', () => {
   if (!agendaList.length) return alert('Belum ada agenda hari ini.');
 
-  const today = new Date().toLocaleDateString('id-ID', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
-  let output = `**AGENDA PEJABAT KECAMATAN DUMAI KOTA HARI INI:**\n📅: ${today}\n-------------------------\n`;
-
-  agendaList.forEach(item => {
-    output += `⏰: \`${item.pukul}\` WIB\n`;
-    output += `✉ : \`${item.acara}\`\n`;
-    output += `📍: \`${item.lokasi}\`\n`;
-    output += `Dihadiri oleh :\n\`${item.pejabat}\`\n\n`;
+  const today = new Date().toLocaleDateString('id-ID', {
+    weekday: 'long',
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
   });
 
-  output += `\n\n\n\n**_CATATAN: Harap hadir lebih awal._**`;
+  // Header
+  let output = `**AGENDA PEJABAT KECAMATAN DUMAI KOTA HARI INI:**\n📅: ${today}\n-------------------------\n`;
 
+  // Isi agenda
+  agendaList.forEach(item => {
+    output += `\n⏰: \`${item.pukul}\` WIB\n\n`;
+    output += `📝: \`${item.acara}\`\n\n`;
+    output += `📍: \`${item.lokasi}\`\n\n`;
+    output += `*Dihadiri oleh :*\n*${item.pejabat}*\n\n`;
+  });
+
+  // Footer
+  output += `\n\n\n\n\n**_CATATAN: Harap hadir lebih awal._**`;
+
+  // Salin ke clipboard
   navigator.clipboard.writeText(output);
   alert('Agenda berhasil disalin ke clipboard (format WA).');
 });
@@ -71,4 +81,5 @@ printBtn.addEventListener('click', () => {
   printAgendaLog(agendaList);
 });
 
+// Render tabel saat halaman dimuat
 renderTable();
