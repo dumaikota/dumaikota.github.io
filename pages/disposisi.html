@@ -3,26 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Disposisi Surat - Kecamatan Dumai Kota</title>
+  <title>Modul Disposisi Kecamatan Dumai Kota</title>
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.0.1/dist/tesseract.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
-    body { font-family: Arial, sans-serif; background:#f8faf8; margin:0; padding:2rem; }
+    body { font-family: Arial, sans-serif; background:#f9faf9; margin:0; padding:20px; }
     h2 { color:#004b23; }
-    small { color:#555; font-style:italic; }
-    select, input, textarea, button { width:100%; padding:0.5rem; margin:0.3rem 0; border-radius:6px; border:1px solid #ccc; }
-    button { background:#004b23; color:white; border:none; cursor:pointer; }
-    button:hover { background:#007230; }
-    table { width:100%; border-collapse:collapse; margin-top:1rem; }
-    th, td { border:1px solid #ccc; padding:8px; text-align:left; }
+    button { padding:8px 12px; border:none; border-radius:6px; cursor:pointer; margin:3px; }
+    button:hover { opacity:0.9; }
+    #toolbar button { font-size:0.95rem; }
+    #toolbar { margin-bottom:10px; }
+    .btn-home { background:#1976d2; color:white; }
+    .btn-printall { background:#388e3c; color:white; }
+    .btn-delete { background:#d32f2f; color:white; }
+    .btn-edit { background:#fbc02d; color:black; }
+    input, select, textarea { width:100%; padding:6px; border-radius:5px; border:1px solid #ccc; margin-bottom:6px; }
+    table { width:100%; border-collapse:collapse; margin-top:10px; }
+    th, td { border:1px solid #ccc; padding:6px; text-align:left; }
     th { background:#e6f2e6; }
-    #uploadSection { display:none; margin-top:1rem; }
+    @media(max-width:768px){ button { width:100%; margin-bottom:6px; } }
   </style>
 </head>
 <body>
-  <h2>📨 Modul Disposisi Surat</h2>
-  <small>🧩 Versi v4 Hybrid Input – Manual | Gambar (OCR) | Srikandi (PDF)</small>
+  <h2>🏛️ Modul Disposisi Kecamatan Dumai Kota</h2>
+  <small>🧩 Versi v5 Field Edition – Manual | OCR | Srikandi</small>
+  
+  <div id="toolbar">
+    <button class="btn-home" onclick="window.location.href='../index.html'">🏠 Kembali ke Beranda</button>
+    <button class="btn-printall" onclick="printAllDisposisi()">🗂️ Cetak Semua Disposisi</button>
+  </div>
 
   <label>Sumber Data Surat:</label>
   <select id="inputMode">
@@ -31,9 +41,9 @@
     <option value="srikandi">📄 Dari Srikandi (PDF)</option>
   </select>
 
-  <div id="uploadSection">
-    <label>Upload Surat (JPG/PNG/PDF):</label>
-    <input type="file" id="fileUpload" accept=".jpg,.jpeg,.png,.pdf">
+  <div id="uploadSection" style="display:none;">
+    <label id="uploadLabel">Upload Surat:</label>
+    <input type="file" id="fileUpload">
     <button type="button" id="extractBtn">🔍 Ekstrak Data</button>
     <p id="extractStatus"></p>
   </div>
@@ -59,10 +69,9 @@
     <textarea id="tujuan" rows="2"></textarea>
     <label>Catatan Disposisi:</label>
     <textarea id="catatan" rows="3"></textarea>
-    <button type="submit">📩 Simpan Disposisi</button>
+    <button type="submit" class="btn-printall">📩 Simpan Disposisi</button>
   </form>
 
-  <hr>
   <h3>📋 Daftar Disposisi</h3>
   <table id="disposisiTable">
     <thead>
