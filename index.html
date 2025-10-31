@@ -4,21 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aplikasi Kontrol Manajemen Camat Dumai Kota</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 </head>
 <body>
   <header>
-    <h1>🌆 Aplikasi Kontrol Manajemen Camat Dumai Kota</h1>
+    <h1>Kecamatan Dumai Kota</h1>
     <nav>
-      <a href="pages/agenda.html">Agenda</a>
-      <a href="pages/disposisi.html">Disposisi</a>
-      <a href="pages/nota_dinas.html">Nota Dinas</a>
-      <a href="pages/surat_tugas.html">Surat Tugas</a>
+      <button data-route="dashboard">Dashboard</button>
+      <button data-route="disposisi">Disposisi</button>
+      <button data-route="nota">Nota Dinas</button>
+      <button data-route="tugas">Surat Tugas</button>
+      <button data-route="agenda">Agenda Harian</button>
     </nav>
   </header>
-  <main>
-    <p>Selamat datang di portal kontrol manajemen Kecamatan Dumai Kota.</p>
-  </main>
-  <script src="js/main.js"></script>
+
+  <main id="app"></main>
+
+  <footer>
+    <p>© 2025 Kecamatan Dumai Kota</p>
+  </footer>
+
+  <script type="module" src="main.js"></script>
 </body>
 </html>
