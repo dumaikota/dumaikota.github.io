@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Aplikasi Camat Dumai Kota</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="login-container card">
+    <h2>Login Aplikasi Camat Dumai Kota</h2>
+    <form id="loginForm">
+      <label>Username:</label>
+      <input type="text" id="username" required>
+      <label>Password:</label>
+      <input type="password" id="password" required>
+      <button type="submit" class="action">Masuk</button>
+    </form>
+    <p id="loginError" style="color:red;display:none;">Username atau password salah!</p>
+  </div>
+  <script>
+    const users = [
+      { username: "cdk", password: "iconmantap", role: "camat", nama: "Camat Dumai Kota" },
+      { username: "sekcam", password: "dumkotinti", role: "sekcam", nama: "Sekretaris Kecamatan Dumai Kota" },
+      { username: "subagtu", password: "dumkotinti", role: "subagtu", nama: "Sub Bagian Tata Usaha Dumai Kota" },
+      { username: "admin", password: "dumkotinti", role: "admin", nama: "Administrator Kecamatan Dumai Kota" },
+      { username: "subagprogram", password: "dumkotidaman", role: "subagprogram", nama: "Sub Bagian Program Dumai Kota" },
+      { username: "kasipem", password: "dumkotidaman", role: "kasipem", nama: "Kasi Pemerintahan" },
+      { username: "kasikesos", password: "dumkotidaman", role: "kasikesos", nama: "Kasi Kesejahteraan Sosial" },
+      { username: "kasiekbang", password: "dumkotidaman", role: "kasiekbang", nama: "Kasi Ekonomi & Pembangunan" },
+      { username: "kasitrantib", password: "dumkotidaman", role: "kasitrantib", nama: "Kasi Ketertiban & Ketentraman" },
+      { username: "kasipm", password: "dumkotidaman", role: "kasipm", nama: "Kasi Pemberdayaan Masyarakat" },
+      { username: "lurah_sukajadi", password: "dumkotidaman", role: "lurah", wilayah: "Sukajadi", nama: "Lurah Sukajadi" },
+      { username: "lurah_bintan", password: "dumkotidaman", role: "lurah", wilayah: "Bintan", nama: "Lurah Bintan" },
+      { username: "lurah_rimbas", password: "dumkotidaman", role: "lurah", wilayah: "Rimba Sekampung", nama: "Lurah Rimba Sekampung" },
+      { username: "lurah_laksamana", password: "dumkotidaman", role: "lurah", wilayah: "Laksamana", nama: "Lurah Laksamana" },
+      { username: "lurah_dukot", password: "dumkotidaman", role: "lurah", wilayah: "Dumai Kota", nama: "Lurah Dumai Kota" }
+    ];
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const u = username.value.trim();
+      const p = password.value.trim();
+      const user = users.find(x => x.username === u && x.password === p);
+      if (user) {
+        localStorage.setItem("session", JSON.stringify(user));
+        window.location.href = "index.html";
+      } else {
+        document.getElementById("loginError").style.display = "block";
+      }
+    });
+  </script>
+</body>
+</html>
