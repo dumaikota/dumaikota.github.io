@@ -1,0 +1,25 @@
+<section id="dashboard">
+  <h2>Dashboard Ringkasan</h2>
+
+  <div class="cards">
+    <div class="card"><h3>Disposisi</h3><p id="count-disposisi">0</p></div>
+    <div class="card"><h3>Nota Dinas</h3><p id="count-nd">0</p></div>
+    <div class="card"><h3>Surat Tugas</h3><p id="count-st">0</p></div>
+    <div class="card"><h3>Agenda</h3><p id="count-agenda">0</p></div>
+  </div>
+
+  <h3 style="margin-top:20px;">Agenda Terjadwal</h3>
+
+  <div class="filter">
+    <label>Lihat:</label>
+    <select id="filter-agenda">
+      <option value="hari">Hari Ini</option>
+      <option value="besok">Besok</option>
+      <option value="minggu">Minggu Ini</option>
+      <option value="semua">Semua</option>
+    </select>
+  </div>
+
+  <ul id="timeline"></ul>
+  <canvas id="agendaChart" width="400" height="150"></canvas>
+</section>
