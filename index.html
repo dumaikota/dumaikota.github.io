@@ -11,9 +11,12 @@
 </head>
 <body>
   <header class="header">
-    <img src="assets/img/dumai.png" alt="Logo Dumai" class="logo-left">
-    <h1>Aplikasi Kontrol Manajemen Camat Dumai Kota</h1>
-    <img src="assets/img/asn.png" alt="Logo ASN" class="logo-right">
+    <div class="logo-group">
+      <img src="assets/img/dumai.png" alt="Logo Dumai" class="logo-left">
+      <img src="assets/img/dumai_idaman.png" alt="Logo Dumai Idaman" class="logo-center">
+      <img src="assets/img/asn.png" alt="Logo ASN" class="logo-right">
+    </div>
+    <div id="user-info" class="user-info"></div>
   </header>
 
   <div id="login-section">
@@ -35,6 +38,11 @@
   </nav>
 
   <main id="app"></main>
-  <footer class="footer">© 2025 Kecamatan Dumai Kota</footer>
+
+  <footer id="footer-quote">
+    <div id="footer-sign">💬 <b>Quotes by Camat Dumai Kota</b></div>
+    <div id="daily-quote" class="quote-text"></div>
+    <div id="datetime"></div>
+  </footer>
 </body>
 </html>
