@@ -1,4 +1,3 @@
-// router.js
 export async function navigate(route) {
   const session = JSON.parse(localStorage.getItem("session"));
   if (!session) {
@@ -17,23 +16,26 @@ export async function navigate(route) {
   const app = document.getElementById("app");
   app.innerHTML = "<p>Memuat...</p>";
 
-  if (routes[route]) {
-    const module = await routes[route]();
-    app.innerHTML = "";
-    module.render(app, session);
-  } else {
-    app.innerHTML = "<h2>Halaman tidak ditemukan.</h2>";
+  try {
+    if (routes[route]) {
+      const module = await routes[route]();
+      app.innerHTML = "";
+      module.render(app, session);
+    } else {
+      app.innerHTML = "<h2>Halaman tidak ditemukan.</h2>";
+    }
+  } catch (err) {
+    console.error("Gagal memuat modul:", err);
+    app.innerHTML = `<div class="card"><h3>❌ Error memuat halaman</h3><p>${err.message}</p></div>`;
   }
 }
 
-// === Jalankan otomatis berdasarkan hash ===
-document.addEventListener("DOMContentLoaded", () => {
-  const initial = window.location.hash.replace("#", "") || "dashboard";
-  navigate(initial);
+// --- Jalankan otomatis sesuai hash / default ---
+function loadRoute() {
+  const hash = window.location.hash.replace("#", "");
+  const route = hash || "dashboard";
+  navigate(route);
+}
 
-  // kalau hash berubah (klik tombol nav, dll)
-  window.addEventListener("hashchange", () => {
-    const route = window.location.hash.replace("#", "");
-    navigate(route);
-  });
-});
+window.addEventListener("hashchange", loadRoute);
+document.addEventListener("DOMContentLoaded", loadRoute);

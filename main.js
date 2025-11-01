@@ -1,4 +1,5 @@
-// main.js
+import { navigate } from "./router.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const session = JSON.parse(localStorage.getItem("session"));
   if (!session) {
@@ -6,19 +7,23 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  // tampilkan info user
   const userInfo = document.getElementById("userInfo");
-  userInfo.textContent = `${session.nama} (${session.role}${session.wilayah ? " - " + session.wilayah : ""})`;
+  if (userInfo)
+    userInfo.textContent = `${session.nama} (${session.role}${session.wilayah ? " - " + session.wilayah : ""})`;
 
-  // tombol nav ubah hash
+  // tombol nav ubah hash, bukan panggil navigate langsung
   document.querySelectorAll("nav button[data-route]").forEach((btn) => {
     btn.addEventListener("click", () => {
       window.location.hash = btn.dataset.route;
     });
   });
 
-  // tombol logout
-  document.getElementById("logoutBtn").addEventListener("click", () => {
-    localStorage.removeItem("session");
-    window.location.href = "index.html";
-  });
+  // logout
+  const logout = document.getElementById("logoutBtn");
+  if (logout)
+    logout.addEventListener("click", () => {
+      localStorage.removeItem("session");
+      window.location.href = "index.html";
+    });
 });
