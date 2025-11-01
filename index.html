@@ -9,8 +9,12 @@
 <body class="gradient-bg">
   <div class="login-wrapper">
     <div class="login-card">
-      <img src="dumai.png" alt="Logo Kota Dumai" class="logo-login" />
+      <div class="logo-row">
+        <img src="./asn.png" alt="ASN Logo" class="logo-mini" />
+        <img src="./dumai.png" alt="Logo Kota Dumai" class="logo-mini" />
+      </div>
       <h2>Aplikasi Kontrol Manajemen<br>Camat Dumai Kota</h2>
+
       <form id="loginForm">
         <label>Username</label>
         <input type="text" id="username" required />
@@ -53,8 +57,6 @@
       const user = users.find((x) => x.username === u && x.password === p);
       if (user) {
         localStorage.setItem("session", JSON.stringify(user));
-
-        // redirect otomatis berdasarkan role
         if (["lurah", "sekel"].includes(user.role)) {
           window.location.href = "home.html#agenda";
         } else {

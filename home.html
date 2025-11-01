@@ -1,27 +1,43 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aplikasi Kontrol Manajemen Camat Dumai Kota</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 </head>
 <body>
   <header>
-    <h1>Kecamatan Dumai Kota</h1>
-    <p id="userInfo"></p>
-    <nav>
-      <button data-route="dashboard">Dashboard</button>
-      <button data-route="disposisi">Disposisi</button>
-      <button data-route="nota">Nota Dinas</button>
-      <button data-route="tugas">Surat Tugas</button>
-      <button data-route="agenda">Agenda Harian</button>
-      <button id="logoutBtn" style="background:#d9534f;color:white;">Logout</button>
-    </nav>
+    <div class="header-left">
+      <img src="./asn.png" alt="Logo ASN" class="logo-header" />
+    </div>
+
+    <div class="header-center">
+      <img src="./dumai_idaman.png" alt="Dumai Idaman" class="logo-idaman" />
+      <h1>Aplikasi Camat Dumai Kota</h1>
+    </div>
+
+    <div class="header-right">
+      <img src="./dumai.png" alt="Logo Kota Dumai" class="logo-header" />
+    </div>
   </header>
+
+  <nav>
+    <button data-route="dashboard">Dashboard</button>
+    <button data-route="disposisi">Disposisi</button>
+    <button data-route="nota">Nota Dinas</button>
+    <button data-route="tugas">Surat Tugas</button>
+    <button data-route="agenda">Agenda Harian</button>
+    <button id="logoutBtn" style="background:#d9534f;color:white;">Logout</button>
+  </nav>
+
   <main id="app"></main>
-  <footer><p>© 2025 Kecamatan Dumai Kota</p></footer>
+
+  <footer>
+    <p>© 2025 Kecamatan Dumai Kota</p>
+  </footer>
+
   <script type="module" src="main.js"></script>
 </body>
 </html>
