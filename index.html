@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplikasi Kontrol Manajemen Camat Dumai Kota</title>
+  <link rel="stylesheet" href="css/style.css">
+  <!-- pdfmake CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <header class="header">
+    <img src="assets/img/dumai.png" alt="Logo Dumai" class="logo-left">
+    <h1>Aplikasi Kontrol Manajemen Camat Dumai Kota</h1>
+    <img src="assets/img/asn.png" alt="Logo ASN" class="logo-right">
+  </header>
+
+  <div id="login-section">
+    <h2>Login Pengguna</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button id="login-btn">Masuk</button>
+    <p id="login-status"></p>
+  </div>
+
+  <nav class="menu hidden" id="main-menu">
+    <button data-page="home">Beranda</button>
+    <button data-page="disposisi">Disposisi</button>
+    <button data-page="notadinas">Nota Dinas</button>
+    <button data-page="surattugas">Surat Tugas</button>
+    <button data-page="agenda">Agenda</button>
+    <button data-page="export">Export/Import</button>
+    <button data-page="logout">Keluar</button>
+  </nav>
+
+  <main id="app"></main>
+  <footer class="footer">© 2025 Kecamatan Dumai Kota</footer>
+</body>
+</html>
