@@ -26,9 +26,14 @@ export async function navigate(route) {
   }
 }
 
-// auto-load berdasarkan hash (#agenda)
+// === Jalankan otomatis berdasarkan hash ===
 document.addEventListener("DOMContentLoaded", () => {
-  const hash = window.location.hash.replace("#", "");
-  const route = hash || "dashboard";
-  navigate(route);
+  const initial = window.location.hash.replace("#", "") || "dashboard";
+  navigate(initial);
+
+  // kalau hash berubah (klik tombol nav, dll)
+  window.addEventListener("hashchange", () => {
+    const route = window.location.hash.replace("#", "");
+    navigate(route);
+  });
 });
