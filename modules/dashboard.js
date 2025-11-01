@@ -1,1 +1,16 @@
-export function render(container, session){container.innerHTML=`<div class="card"><h2>Dashboard</h2><p>Selamat datang, <b>${session.nama}</b>!</p><p>Anda login sebagai: <b>${session.role.toUpperCase()}</b>${session.wilayah ? ` (${session.wilayah})` : ""}</p><hr><h3>Panduan Singkat:</h3><ul><li><b>Disposisi</b>: Kelola surat masuk sesuai peran Anda.</li><li><b>Nota Dinas</b>: Buat atau lihat nota dinas.</li><li><b>Surat Tugas</b>: Tambahkan surat tugas baru.</li><li><b>Agenda</b>: Lihat jadwal kegiatan harian.</li></ul></div>`;}
+export function render(container, session) {
+  container.innerHTML = `
+    <div class="card">
+      <h2>Dashboard</h2>
+      <p>Selamat datang, <b>${session.nama}</b>!</p>
+      <p>Anda login sebagai: <b>${session.role.toUpperCase()}</b>${session.wilayah ? ` (${session.wilayah})` : ""}</p>
+      <hr>
+      <h3>Panduan Singkat:</h3>
+      <ul>
+        <li><b>Disposisi</b>: Kelola surat masuk sesuai peran Anda.</li>
+        <li><b>Nota Dinas</b>: Buat atau lihat nota dinas.</li>
+        <li><b>Surat Tugas</b>: Tambahkan surat tugas baru.</li>
+        <li><b>Agenda</b>: Lihat jadwal kegiatan harian.</li>
+      </ul>
+    </div>`;
+}
