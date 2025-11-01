@@ -15,16 +15,16 @@ export function alamatOtomatis(unit){
 
 export function kop(unit){
   const isKel = unit.includes('Kelurahan');
-  const baris3 = isKel ? 'KELURAHAN '+unit.replace('Kelurahan ','').toUpperCase() : '';
+  const baris3 = isKel ? 'KELURAHAN ' + unit.replace('Kelurahan ', '').toUpperCase() : '';
   return [
     {
       columns:[
-        { image:'assets/img/dumai.png', width:60 },
+        { image:'assets/img/bw_dumai.png', width:60 },   // gunakan logo BW untuk header surat
         {
           stack:[
             { text:'PEMERINTAH KOTA DUMAI', bold:true, alignment:'center' },
             { text:'KECAMATAN DUMAI KOTA', bold:true, alignment:'center' },
-            baris3?{ text:baris3, bold:true, alignment:'center' }:null,
+            baris3 ? { text:baris3, bold:true, alignment:'center' } : null,
             { text:alamatOtomatis(unit), fontSize:9, alignment:'center', margin:[0,2,0,0] }
           ].filter(Boolean)
         }
@@ -36,16 +36,15 @@ export function kop(unit){
 
 export function tandaTangan(role,unit){
   let jab='Camat Dumai Kota';
-  if(role==='Sekcam') jab='a.n. Camat\nSekretaris Kecamatan';
-  if(role==='Lurah') jab='a.n. Camat\nLurah '+unit.replace('Kelurahan ','');
+  if(role==='Sekcam') jab='a.n. Camat\\nSekretaris Kecamatan';
+  if(role==='Lurah') jab='a.n. Camat\\nLurah '+unit.replace('Kelurahan ','');
   return {
-    text:`\n\n${jab}\n\n\n(...............................)`,
+    text:`\\n\\n${jab}\\n\\n\\n(...............................)`,
     alignment:'right',
     margin:[0,30,0,0]
   };
 }
 
-// ---- Generator tiap modul ----
 export function generatePDF(modul,data){
   const u=getUser()||{unit:'Kecamatan Dumai Kota',role:''};
   let doc={ pageSize:'A4', content:[], pageOrientation:'portrait' };
@@ -56,20 +55,20 @@ export function generatePDF(modul,data){
 
   if(modul==='disposisi'){
     doc.content.push({text:'LEMBAR DISPOSISI',alignment:'center',bold:true,margin:[0,5,0,15]});
-    doc.content.push({text:`Nomor: ${data.nomor}\nTanggal: ${data.tanggal}\nPerihal: ${data.perihal}\nPengirim: ${data.pengirim}\nPenerima: ${data.penerima}\n\nIsi:\n${data.isi}`,fontSize:11});
-    if(data.tembusan?.length){ doc.content.push({text:'\nTembusan:',bold:true}); data.tembusan.forEach(t=>doc.content.push({text:'- '+t,fontSize:10})); }
+    doc.content.push({text:`Nomor: ${data.nomor}\\nTanggal: ${data.tanggal}\\nPerihal: ${data.perihal}\\nPengirim: ${data.pengirim}\\nPenerima: ${data.penerima}\\n\\nIsi:\\n${data.isi}`,fontSize:11});
+    if(data.tembusan?.length){ doc.content.push({text:'\\nTembusan:',bold:true}); data.tembusan.forEach(t=>doc.content.push({text:'- '+t,fontSize:10})); }
   }
 
   if(modul==='notadinas'){
     doc.content.push({text:'NOTA DINAS',alignment:'center',bold:true,margin:[0,5,0,15]});
-    doc.content.push({text:`Nomor: ${data.nomor}\nTanggal: ${data.tanggal}\nDari: ${data.dari}\nKepada: ${data.kepada}\nPerihal: ${data.perihal}\n\n${data.isi}`,fontSize:11});
-    if(data.tembusan?.length){ doc.content.push({text:'\nTembusan:',bold:true}); data.tembusan.forEach(t=>doc.content.push({text:'- '+t,fontSize:10})); }
+    doc.content.push({text:`Nomor: ${data.nomor}\\nTanggal: ${data.tanggal}\\nDari: ${data.dari}\\nKepada: ${data.kepada}\\nPerihal: ${data.perihal}\\n\\n${data.isi}`,fontSize:11});
+    if(data.tembusan?.length){ doc.content.push({text:'\\nTembusan:',bold:true}); data.tembusan.forEach(t=>doc.content.push({text:'- '+t,fontSize:10})); }
   }
 
   if(modul==='surattugas'){
     doc.content.push({text:'SURAT TUGAS',alignment:'center',bold:true,margin:[0,5,0,15]});
-    doc.content.push({text:`Nomor: ${data.nomor}\nTanggal: ${data.tanggal}\nDasar: ${data.dasar}\nNama: ${data.nama}\nUraian: ${data.uraian}\nLokasi: ${data.lokasi}`,fontSize:11});
-    if(data.tembusan?.length){ doc.content.push({text:'\nTembusan:',bold:true}); data.tembusan.forEach(t=>doc.content.push({text:'- '+t,fontSize:10})); }
+    doc.content.push({text:`Nomor: ${data.nomor}\\nTanggal: ${data.tanggal}\\nDasar: ${data.dasar}\\nNama: ${data.nama}\\nUraian: ${data.uraian}\\nLokasi: ${data.lokasi}`,fontSize:11});
+    if(data.tembusan?.length){ doc.content.push({text:'\\nTembusan:',bold:true}); data.tembusan.forEach(t=>doc.content.push({text:'- '+t,fontSize:10})); }
   }
 
   if(modul==='agenda'){
