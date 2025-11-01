@@ -1,6 +1,6 @@
 /* Global Settings */
 body {
-  font-family: 'Helvetica', sans-serif; /* Mengganti font menjadi Helvetica */
+  font-family: 'Roboto', sans-serif; /* Menggunakan font Roboto untuk keseluruhan halaman */
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -51,6 +51,7 @@ h2 {
 
 #login-section input {
   border: 1px solid #ccc;
+  font-family: 'Arial', sans-serif; /* Menggunakan font Arial untuk input login */
 }
 
 #login-section button {
@@ -61,6 +62,11 @@ h2 {
 
 #login-section button:hover {
   background-color: #0056b3;
+}
+
+/* MODUL FORM INPUT (Di luar login) */
+input, textarea, select, button {
+  font-family: 'Arial', sans-serif; /* Menggunakan font Arial untuk semua form input di modul */
 }
 
 /* NAVIGATION MENU */
@@ -92,6 +98,7 @@ nav.menu button:hover {
   background-color: #f8f9fa;
   padding: 20px;
   text-align: center;
+  font-family: 'Helvetica', sans-serif; /* Footer menggunakan Helvetica */
   color: #333;
   font-size: 14px;
 }
