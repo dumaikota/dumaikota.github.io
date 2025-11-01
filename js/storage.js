@@ -1,20 +1,17 @@
-// storage.js
-export function loadPage(page){
-  fetch(`html/${page}.html`)
-    .then(res=>res.text())
-    .then(html=>{
-      document.getElementById('app').innerHTML = html;
-      const modules = {
-        disposisi: './disposisi.js',
-        notadinas: './notadinas.js',
-        surattugas: './surattugas.js',
-        agenda: './agenda.js',
-        export: './export.js'
-      };
-      if (modules[page]) import(modules[page]);
-    });
+export function setUser(obj){
+  if(obj) localStorage.setItem('user',JSON.stringify(obj));
+  else localStorage.removeItem('user');
 }
-export function saveData(k,v){ localStorage.setItem(k,JSON.stringify(v)); }
-export function getData(k){ return JSON.parse(localStorage.getItem(k)||'[]'); }
-export function setUser(u){ u?localStorage.setItem('user',JSON.stringify(u)):localStorage.removeItem('user'); }
-export function getUser(){ return JSON.parse(localStorage.getItem('user')||'null'); }
+export function getUser(){
+  return JSON.parse(localStorage.getItem('user')||'null');
+}
+export function addLog(action){
+  const u=JSON.parse(localStorage.getItem('user')||'null');
+  const logs=JSON.parse(localStorage.getItem('activity_log')||'[]');
+  const time=new Date().toLocaleString('id-ID');
+  logs.push({time,user:u?u.role:'Guest',action});
+  localStorage.setItem('activity_log',JSON.stringify(logs));
+}
+export function getLogs(){
+  return JSON.parse(localStorage.getItem('activity_log')||'[]');
+}

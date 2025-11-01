@@ -1,100 +1,101 @@
 // =======================
-// APP MAIN v2.3 FINAL
+// APP MAIN v2.3 RESTABLE
 // =======================
+import { getUser,setUser,addLog } from './storage.js';
 
-import { getUser, setUser, addLog } from './storage.js';
-
-// ---------- QUOTES 300 RANDOM ----------
-const quotes = [
-  "Pelayanan publik bukan beban, tapi kehormatan.",
-  "ASN sejati melayani dengan hati, bukan dengan janji.",
-  "Integritas adalah cahaya birokrasi.",
-  "Kedisiplinan adalah wujud cinta pada profesi.",
-  "Tanda tangan ASN adalah janji, bukan formalitas.",
-  "Kerja keras itu wajib, kerja ikhlas itu mulia.",
-  "ASN bukan singkatan dari 'Ada Saat Ngopi' 😄",
-  "Yang datang tepat waktu bukan keajaiban, tapi komitmen.",
-  "Birokrasi hebat dimulai dari hati yang tulus.",
-  "Senin: semangat, Selasa: selesaikan, Rabu: rawat komitmen.",
-  "Pemimpin hebat lahir dari pelayan yang rendah hati.",
-  "ASN itu pelita, bukan penonton.",
-  "Integritas tidak bisa dicetak, tapi ditanam.",
-  "Senyum ASN, cermin wibawa instansi.",
-  "Kopi boleh dingin, semangat jangan.",
-  "Rapat boleh banyak, hasil jangan kosong.",
-  "Setiap laporan adalah jejak pengabdian.",
-  "Kerja kecil dengan niat besar menjadi ibadah.",
-  "Pelayanan publik: cepat, tepat, dan beretika.",
-  "Jabatan hanyalah amanah, bukan anugerah pribadi.",
-  // ... tambahkan hingga 300 kutipan beragam (formal, humanis, candaan ASN) ...
-];
-
-// ---------- RANDOM QUOTE PICKER ----------
+// ---------- QUOTES HANDLER ----------
+let quotes = [];
+async function loadQuotes(){
+  try{
+    const res = await fetch('data/quotes.json');
+    quotes = await res.json();
+  }catch(e){
+    quotes = ["Gagal memuat kutipan 😅"];
+  }
+}
 function getRandomQuote(){
+  if(!quotes.length) return "Memuat kutipan...";
   return quotes[Math.floor(Math.random()*quotes.length)];
 }
-
-// ---------- TYPEWRITER (fade-by-character) ----------
-function typeQuote(text, element, speed = 30){
-  element.textContent = '';
-  let i = 0;
-  const timer = setInterval(()=>{
-    element.textContent += text.charAt(i);
+function typeQuote(text, element, speed=30){
+  element.textContent='';
+  let i=0;
+  const t=setInterval(()=>{
+    element.textContent+=text.charAt(i);
     i++;
-    if(i >= text.length) clearInterval(timer);
-  }, speed);
+    if(i>=text.length) clearInterval(t);
+  },speed);
 }
-
-// ---------- UPDATE QUOTE + TIME ----------
 function updateQuote(){
   const el=document.getElementById('daily-quote');
   if(!el) return;
   el.style.opacity=0;
   setTimeout(()=>{
-    const newQuote = getRandomQuote();
+    const newQuote=getRandomQuote();
     el.style.opacity=1;
-    typeQuote(newQuote, el, 30);
+    typeQuote(newQuote,el,25);
   },300);
 }
-setInterval(updateQuote,300000); // 5 menit
+setInterval(updateQuote,300000); // tiap 5 menit
 
 function updateTime(){
-  const now = new Date();
-  const hari = now.toLocaleDateString('id-ID',{weekday:'long'});
-  const tanggal = now.toLocaleDateString('id-ID',{day:'2-digit',month:'long',year:'numeric'});
-  const jam = now.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  const now=new Date();
+  const hari=now.toLocaleDateString('id-ID',{weekday:'long'});
+  const tanggal=now.toLocaleDateString('id-ID',{day:'2-digit',month:'long',year:'numeric'});
+  const jam=now.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
   const t=document.getElementById('datetime');
   if(t) t.textContent=`${hari}, ${tanggal} • ${jam} WIB`;
 }
 setInterval(updateTime,1000);
 
-// ---------- LOGIN / LOGOUT ----------
-document.addEventListener('DOMContentLoaded',()=>{
+// ---------- LOGIN ----------
+document.addEventListener('DOMContentLoaded',async()=>{
+  await loadQuotes();
+  updateQuote(); updateTime();
   const u=getUser();
   const info=document.getElementById('user-info');
   if(u){
     info.innerHTML=`👤 ${u.role} | <button id="logout-btn">Logout</button>`;
     document.getElementById('logout-btn').onclick=()=>{ setUser(null); location.reload(); };
   }
-  updateQuote(); updateTime();
+  const loginBtn=document.getElementById('login-btn');
+  if(loginBtn){
+    loginBtn.addEventListener('click',()=>{
+      const usr=document.getElementById('username').value.trim().toLowerCase();
+      const pwd=document.getElementById('password').value.trim();
+      const users={
+        'camat':{role:'Camat'},'sekcam':{role:'Sekcam'},'subag':{role:'Subag TU'},
+        'lurah_sukajadi':{role:'Lurah Sukajadi'},'lurah_bintan':{role:'Lurah Bintan'},
+        'lurah_laksamana':{role:'Lurah Laksamana'},'lurah_rimba':{role:'Lurah Rimba Sekampung'},
+        'operator':{role:'Operator'},'admin':{role:'Admin'}
+      };
+      const infoMsg=document.getElementById('login-status');
+      if(users[usr] && pwd==='123'){
+        setUser({username:usr,role:users[usr].role});
+        addLog(`Login: ${users[usr].role}`);
+        infoMsg.textContent='Login berhasil! Memuat aplikasi...';
+        setTimeout(()=>location.reload(),800);
+      }else{
+        infoMsg.textContent='Username atau password salah.';
+      }
+    });
+  }
 });
 
-// ---------- FADE PAGE TRANSITION ----------
+// ---------- SPA LOADER + FADE ----------
 export async function loadPage(page){
   const main=document.getElementById('app');
   main.classList.add('fade-out');
   setTimeout(async()=>{
     if(page==='logout'){ setUser(null); location.reload(); return; }
-    const res = await fetch(`html/${page}.html`);
-    const html = await res.text();
-    main.innerHTML = html;
+    const res=await fetch(`html/${page}.html`);
+    const html=await res.text();
+    main.innerHTML=html;
     main.classList.remove('fade-out');
     main.classList.add('fade-in');
     setTimeout(()=>main.classList.remove('fade-in'),400);
   },200);
 }
-
-// ---------- MENU EVENT ----------
 document.addEventListener('click',e=>{
   if(e.target.matches('nav button[data-page]')){
     const p=e.target.getAttribute('data-page');

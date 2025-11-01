@@ -1,8 +1,7 @@
-// pdf.js – pdfmake generator + kop dinamis
 import { getUser } from './storage.js';
 
 export function alamatOtomatis(unit){
-  const alamat = {
+  const alamat={
     'Kecamatan Dumai Kota':'Jl. Pattimura, Kel. Laksamana – Kode Pos 28821',
     'Kelurahan Bintan':'Jl. Jenderal Soedirman – Kode Pos 28812',
     'Kelurahan Dumai Kota':'Jl. Datuk Laksamana – Kode Pos 28811',
@@ -12,72 +11,54 @@ export function alamatOtomatis(unit){
   };
   return alamat[unit]||'';
 }
-
 export function kop(unit){
-  const isKel = unit.includes('Kelurahan');
-  const baris3 = isKel ? 'KELURAHAN ' + unit.replace('Kelurahan ', '').toUpperCase() : '';
+  const isKel=unit.includes('Kelurahan');
+  const baris3=isKel?'KELURAHAN '+unit.replace('Kelurahan ','').toUpperCase():'';
   return [
-    {
-      columns:[
-        { image:'assets/img/bw_dumai.png', width:60 },   // gunakan logo BW untuk header surat
-        {
-          stack:[
-            { text:'PEMERINTAH KOTA DUMAI', bold:true, alignment:'center' },
-            { text:'KECAMATAN DUMAI KOTA', bold:true, alignment:'center' },
-            baris3 ? { text:baris3, bold:true, alignment:'center' } : null,
-            { text:alamatOtomatis(unit), fontSize:9, alignment:'center', margin:[0,2,0,0] }
-          ].filter(Boolean)
-        }
-      ]
-    },
-    { canvas:[{ type:'line', x1:0, y1:0, x2:515, y2:0, lineWidth:1.5 }], margin:[0,5,0,10] }
+    {columns:[
+      {image:'assets/img/bw_dumai.png',width:60},
+      {stack:[
+        {text:'PEMERINTAH KOTA DUMAI',bold:true,alignment:'center'},
+        {text:'KECAMATAN DUMAI KOTA',bold:true,alignment:'center'},
+        baris3?{text:baris3,bold:true,alignment:'center'}:null,
+        {text:alamatOtomatis(unit),fontSize:9,alignment:'center',margin:[0,2,0,0]}
+      ].filter(Boolean)}
+    ]},
+    {canvas:[{type:'line',x1:0,y1:0,x2:515,y2:0,lineWidth:1.5}],margin:[0,5,0,10]}
   ];
 }
-
 export function tandaTangan(role,unit){
   let jab='Camat Dumai Kota';
-  if(role==='Sekcam') jab='a.n. Camat\\nSekretaris Kecamatan';
-  if(role==='Lurah') jab='a.n. Camat\\nLurah '+unit.replace('Kelurahan ','');
-  return {
-    text:`\\n\\n${jab}\\n\\n\\n(...............................)`,
-    alignment:'right',
-    margin:[0,30,0,0]
-  };
+  if(role==='Sekcam') jab='a.n. Camat\nSekretaris Kecamatan';
+  if(role==='Lurah') jab='a.n. Camat\nLurah '+unit.replace('Kelurahan ','');
+  return {text:`\n\n${jab}\n\n\n(...............................)`,alignment:'right',margin:[0,30,0,0]};
 }
-
+function parseMarkdown(md){
+  const lines=(md||'').split(/\r?\n/);
+  const body=[];
+  lines.forEach(l=>{
+    if(l.startsWith('- ')){body.push({text:'• '+l.slice(2),margin:[10,2,0,0]});return;}
+    if(l.match(/^\d+\./)){body.push({text:l,margin:[10,2,0,0]});return;}
+    if(l.trim()===''){body.push({text:' ',margin:[0,4]});return;}
+    body.push({text:l.replace(/\*\*(.*?)\*\*/g,'$1').replace(/_(.*?)_/g,'$1'),margin:[0,2],fontSize:11});
+  });
+  return body;
+}
 export function generatePDF(modul,data){
   const u=getUser()||{unit:'Kecamatan Dumai Kota',role:''};
-  let doc={ pageSize:'A4', content:[], pageOrientation:'portrait' };
+  let doc={pageSize:'A4',pageOrientation:'portrait',content:[],pageMargins:[85,70,57,70]};
   if(modul==='disposisi') doc.pageSize='A5';
   if(modul==='notadinas'||modul==='surattugas') doc.pageSize='LEGAL';
   if(modul==='agenda') doc.pageOrientation='landscape';
   doc.content.push(...kop(u.unit));
-
-  if(modul==='disposisi'){
-    doc.content.push({text:'LEMBAR DISPOSISI',alignment:'center',bold:true,margin:[0,5,0,15]});
-    doc.content.push({text:`Nomor: ${data.nomor}\\nTanggal: ${data.tanggal}\\nPerihal: ${data.perihal}\\nPengirim: ${data.pengirim}\\nPenerima: ${data.penerima}\\n\\nIsi:\\n${data.isi}`,fontSize:11});
-    if(data.tembusan?.length){ doc.content.push({text:'\\nTembusan:',bold:true}); data.tembusan.forEach(t=>doc.content.push({text:'- '+t,fontSize:10})); }
+  const parsed=parseMarkdown(data.isi||'');
+  doc.content.push({text:data.judul||modul.toUpperCase(),alignment:'center',bold:true,margin:[0,5,0,15]});
+  doc.content.push(...parsed);
+  if(data.tembusan?.length){
+    doc.content.push({text:'\nTembusan:',bold:true});
+    data.tembusan.forEach(t=>doc.content.push({text:'- '+t,fontSize:10}));
   }
-
-  if(modul==='notadinas'){
-    doc.content.push({text:'NOTA DINAS',alignment:'center',bold:true,margin:[0,5,0,15]});
-    doc.content.push({text:`Nomor: ${data.nomor}\\nTanggal: ${data.tanggal}\\nDari: ${data.dari}\\nKepada: ${data.kepada}\\nPerihal: ${data.perihal}\\n\\n${data.isi}`,fontSize:11});
-    if(data.tembusan?.length){ doc.content.push({text:'\\nTembusan:',bold:true}); data.tembusan.forEach(t=>doc.content.push({text:'- '+t,fontSize:10})); }
-  }
-
-  if(modul==='surattugas'){
-    doc.content.push({text:'SURAT TUGAS',alignment:'center',bold:true,margin:[0,5,0,15]});
-    doc.content.push({text:`Nomor: ${data.nomor}\\nTanggal: ${data.tanggal}\\nDasar: ${data.dasar}\\nNama: ${data.nama}\\nUraian: ${data.uraian}\\nLokasi: ${data.lokasi}`,fontSize:11});
-    if(data.tembusan?.length){ doc.content.push({text:'\\nTembusan:',bold:true}); data.tembusan.forEach(t=>doc.content.push({text:'- '+t,fontSize:10})); }
-  }
-
-  if(modul==='agenda'){
-    doc.content.push({text:'DAFTAR AGENDA HARIAN',alignment:'center',bold:true,margin:[0,5,0,15]});
-    const body=[['Tanggal','Jam','Kegiatan','Lokasi','Hadir']];
-    data.forEach(d=>body.push([d.tanggal,d.jam,d.judul,d.lokasi,d.hadir]));
-    doc.content.push({table:{headerRows:1,widths:['*','*','*','*','*'],body},fontSize:9});
-  }
-
   doc.content.push(tandaTangan(u.role,u.unit));
-  pdfMake.createPdf(doc).download(`${modul.toUpperCase()}_${data.nomor||'AGENDA'}.pdf`);
+  if(typeof pdfMake==='undefined'){alert('Generator PDF belum siap');return;}
+  pdfMake.createPdf(doc).download(`${modul.toUpperCase()}_${data.nomor||'DOK'}.pdf`);
 }

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aplikasi Kontrol Manajemen Camat Dumai Kota</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="assets/img/dumai.png">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
   <script type="module" src="js/app.js"></script>
@@ -44,5 +45,15 @@
     <div id="daily-quote" class="quote-text"></div>
     <div id="datetime"></div>
   </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded',()=>{
+      const u = localStorage.getItem('user');
+      if(u){
+        document.getElementById('login-section').style.display='none';
+        document.getElementById('main-menu').classList.remove('hidden');
+      }
+    });
+  </script>
 </body>
 </html>
