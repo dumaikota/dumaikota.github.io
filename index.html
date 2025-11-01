@@ -9,12 +9,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
   <script type="module" src="js/app.js"></script>
-      <!-- SimpleMDE (Markdown Editor) -->
+  <!-- SimpleMDE (Markdown Editor) -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
   <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-
 </head>
 <body>
+  <!-- HEADER -->
   <header class="header">
     <div class="logo-group">
       <img src="assets/img/dumai.png" alt="Logo Dumai" class="logo-left">
@@ -24,14 +24,16 @@
     <div id="user-info" class="user-info"></div>
   </header>
 
+  <!-- LOGIN SECTION -->
   <div id="login-section">
     <h2>Login Pengguna</h2>
-    <input type="text" id="username" placeholder="Username">
-    <input type="password" id="password" placeholder="Password">
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="password" id="password" placeholder="Password" required>
     <button id="login-btn">Masuk</button>
     <p id="login-status"></p>
   </div>
 
+  <!-- NAVIGATION MENU -->
   <nav class="menu hidden" id="main-menu">
     <button data-page="home">Beranda</button>
     <button data-page="disposisi">Disposisi</button>
@@ -44,6 +46,7 @@
 
   <main id="app"></main>
 
+  <!-- FOOTER -->
   <footer id="footer-quote">
     <div id="footer-sign">💬 <b>Quotes by Camat Dumai Kota</b></div>
     <div id="daily-quote" class="quote-text"></div>
@@ -51,10 +54,10 @@
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded',()=>{
+    document.addEventListener('DOMContentLoaded', () => {
       const u = localStorage.getItem('user');
-      if(u){
-        document.getElementById('login-section').style.display='none';
+      if(u) {
+        document.getElementById('login-section').style.display = 'none';
         document.getElementById('main-menu').classList.remove('hidden');
       }
     });
