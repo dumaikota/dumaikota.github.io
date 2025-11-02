@@ -1,173 +1,108 @@
-// === IMPORT DARI STORAGE.JS ===
-import { getUser, setUser, addLog } from './storage.js';
+// ==========================================================
+//  app.js — Sistem Tata Naskah Dinas Kecamatan Dumai Kota
+//  Berdasarkan Permendagri No.1 Tahun 2023
+// ==========================================================
 
-let quotes = [];
-let users = {};
-let cache = {}; // untuk menyimpan halaman yang sudah di-load
-
-// === LOAD DATA QUOTES DAN USERS ===
-async function loadQuotes() {
+// Fungsi decode Base64 (untuk password terenkripsi)
+function decodeBase64(str) {
   try {
-    const r = await fetch('data/quotes.json');
-    quotes = await r.json();
+    return atob(str);
   } catch (e) {
-    quotes = ["Gagal memuat kutipan 😅"];
+    return str;
   }
 }
 
+// Fungsi untuk memuat data user dari users.json
 async function loadUsers() {
-  try {
-    const r = await fetch('data/users.json');
-    users = await r.json();
-  } catch (e) {
-    users = {};
+  const response = await fetch("users.json");
+  const users = await response.json();
+  return users;
+}
+
+// Proses login utama
+async function login(event) {
+  event.preventDefault();
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  const users = await loadUsers();
+
+  if (users[username]) {
+    const storedPassword = decodeBase64(users[username].password);
+    if (password === storedPassword) {
+      localStorage.setItem("username", username);
+      localStorage.setItem("role", users[username].role);
+      window.location.href = "home.html";
+      return;
+    }
   }
+
+  alert("❌ Username atau password salah!");
 }
 
-// === TAMPILAN KUTIPAN HARIAN ===
-function getRandomQuote() {
-  return quotes[Math.floor(Math.random() * quotes.length)] || "Memuat kutipan...";
+// Logout
+function logout() {
+  localStorage.clear();
+  window.location.href = "index.html";
 }
 
-function updateQuote() {
-  const el = document.getElementById('daily-quote');
-  if (!el) return;
-  el.style.opacity = 0;
-  setTimeout(() => {
-    el.style.opacity = 1;
-    el.textContent = getRandomQuote();
-  }, 500);
-}
+// Saat halaman home dibuka, tampilkan info login
+function checkLogin() {
+  const username = localStorage.getItem("username");
+  const role = localStorage.getItem("role");
 
-// === TAMPILAN JAM REAL-TIME ===
-function updateClock() {
-  const el = document.getElementById('datetime');
-  if (!el) return;
-  const now = new Date();
-  el.textContent = now.toLocaleString('id-ID', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
-  });
-}
-
-// === GANTI HALAMAN (NAVIGASI DINAMIS) ===
-async function loadPage(page) {
-  const app = document.getElementById('app');
-  if (!app) return;
-
-  if (cache[page]) {
-    app.innerHTML = cache[page];
+  if (!username) {
+    window.location.href = "index.html";
     return;
   }
 
-  try {
-    const res = await fetch(`html/${page}.html`);
-    const html = await res.text();
-    cache[page] = html;
-    app.innerHTML = html;
-  } catch (err) {
-    app.innerHTML = `<p style="color:red;">Gagal memuat halaman ${page}.html</p>`;
+  const userInfo = document.getElementById("user-info");
+  if (userInfo) {
+    userInfo.innerHTML = `<b>${role}</b>`;
   }
 }
 
-// === LOGIN HANDLER ===
-async function initLogin() {
-  await loadUsers();
-
-  const loginBtn = document.getElementById('login-btn');
-  const status = document.getElementById('login-status');
-  const inputUser = document.getElementById('username');
-
-  loginBtn.addEventListener('click', () => {
-    const uname = inputUser.value.trim().toLowerCase();
-    const user = users[uname];
-
-    if (!uname) {
-      status.textContent = "Masukkan nama pengguna terlebih dahulu.";
-      status.style.color = "orange";
-      return;
-    }
-
-    if (user) {
-      setUser({ username: uname, role: user.role });
-      addLog(`Login sebagai ${user.role}`);
-
-      document.getElementById('login-section').style.display = 'none';
-      document.getElementById('main-menu').classList.remove('hidden');
-
-      const info = document.getElementById('user-info');
-      info.innerHTML = `
-        👤 <b>${user.role}</b>
-        <button id="logout-btn">Keluar</button>
-      `;
-      document.getElementById('logout-btn').addEventListener('click', logout);
-
-      status.textContent = "";
-      loadPage('home');
-    } else {
-      status.textContent = "❌ Nama pengguna tidak dikenal.";
-      status.style.color = "red";
-    }
-  });
+// Routing halaman berdasarkan menu
+function loadPage(page) {
+  fetch(page)
+    .then((response) => response.text())
+    .then((data) => {
+      document.getElementById("content").innerHTML = data;
+    })
+    .catch((error) => {
+      document.getElementById("content").innerHTML =
+        "<p>Terjadi kesalahan memuat halaman.</p>";
+    });
 }
 
-// === LOGOUT HANDLER ===
-function logout() {
-  localStorage.removeItem('user');
-  addLog('Logout pengguna');
-  document.getElementById('main-menu').classList.add('hidden');
-  document.getElementById('login-section').style.display = 'block';
-  document.getElementById('user-info').textContent = "";
-  document.getElementById('app').innerHTML = "";
-}
-
-// === INISIALISASI MENU ===
-function initMenu() {
-  const menu = document.getElementById('main-menu');
-  if (!menu) return;
-
-  menu.addEventListener('click', (e) => {
-    if (e.target.tagName === 'BUTTON') {
-      const page = e.target.dataset.page;
-      if (page === 'logout') {
-        logout();
-      } else {
-        loadPage(page);
-        document.querySelectorAll('nav.menu button')
-          .forEach(btn => btn.classList.remove('active'));
-        e.target.classList.add('active');
-      }
-    }
-  });
-}
-
-// === SAAT HALAMAN DIMUAT ===
-document.addEventListener('DOMContentLoaded', async () => {
-  await loadQuotes();
-  setInterval(updateQuote, 8000);
-  updateQuote();
-  setInterval(updateClock, 1000);
-
-  const u = getUser();
-
-  if (u) {
-    // Jika user masih login
-    document.getElementById('login-section').style.display = 'none';
-    document.getElementById('main-menu').classList.remove('hidden');
-    const info = document.getElementById('user-info');
-    info.innerHTML = `
-      👤 <b>${u.role}</b>
-      <button id="logout-btn">Keluar</button>
-    `;
-    document.getElementById('logout-btn').addEventListener('click', logout);
-    loadPage('home');
-  } else {
-    initLogin();
+// Jalankan pemeriksaan login otomatis saat halaman dibuka
+document.addEventListener("DOMContentLoaded", () => {
+  const currentPage = window.location.pathname.split("/").pop();
+  if (currentPage !== "index.html") {
+    checkLogin();
   }
 
-  initMenu();
+  // Tambahkan listener untuk tombol logout (jika ada)
+  const logoutBtn = document.getElementById("logout");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", logout);
+  }
 });
+
+// ==========================================================
+// Fungsi tambahan untuk tampilan & informasi footer
+// ==========================================================
+function showFooterLegal() {
+  const footer = document.getElementById("footer-legal");
+  if (footer) {
+    footer.innerHTML = `
+      <small>
+        🏛️ Berdasarkan <b>Permendagri Nomor 1 Tahun 2023</b> tentang Tata Naskah Dinas 
+        di Lingkungan Pemerintah Daerah. <br/>
+        Aplikasi Tata Naskah Dinas Elektronik (TND-E) — Kecamatan Dumai Kota.
+      </small>
+    `;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", showFooterLegal);
