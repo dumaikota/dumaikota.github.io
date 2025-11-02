@@ -1,31 +1,3 @@
-```mermaid
-graph TD
-    A[Camat Dumai Kota - Eselon III.A]
-    A --> B[Sekretaris Kecamatan - Eselon III.B]
-    B --> C1[Kasubag Umum dan Kepegawaian - Eselon IV.B]
-    B --> C2[Kasubag Perencanaan dan Keuangan - Eselon IV.B]
-    A --> D1[Kasi Pemerintahan - Eselon IV.A]
-    A --> D2[Kasi Pemberdayaan Masyarakat dan Pembangunan - Eselon IV.A]
-    A --> D3[Kasi Ketentraman dan Ketertiban Umum - Eselon IV.A]
-    A --> D4[Kasi Pelayanan Umum - Eselon IV.A]
-
-    A --> KEL1[Lurah Bintan - Eselon IV.A]
-    KEL1 --> SK1[Sekretaris Kelurahan Bintan - Eselon IV.B]
-
-    A --> KEL2[Lurah Dumai Kota - Eselon IV.A]
-    KEL2 --> SK2[Sekretaris Kelurahan Dumai Kota - Eselon IV.B]
-
-    A --> KEL3[Lurah Laksamana - Eselon IV.A]
-    KEL3 --> SK3[Sekretaris Kelurahan Laksamana - Eselon IV.B]
-
-    A --> KEL4[Lurah Rimba Sekampung - Eselon IV.A]
-    KEL4 --> SK4[Sekretaris Kelurahan Rimba Sekampung - Eselon IV.B]
-
-    A --> KEL5[Lurah Sukajadi - Eselon IV.A]
-    KEL5 --> SK5[Sekretaris Kelurahan Sukajadi - Eselon IV.B]
-
-
-
 <p align="center">
   <img src="assets/img/dumai.png" width="80">
   <img src="assets/img/dumai_idaman.png" width="100">
@@ -128,3 +100,33 @@ Dikembangkan untuk mendukung digitalisasi tata naskah dinas dan manajemen kinerj
 
 © 2025 Aplikasi Kontrol Manajemen Camat Dumai Kota  
 💬 *“Melayani dengan hati, bukan sekadar rutinitas.”*
+
+
+
+
+
+```mermaid
+graph TD
+    A[Camat Dumai Kota - Eselon III.A]
+    A --> B[Sekretaris Kecamatan - Eselon III.B]
+    B --> C1[Kasubag Umum dan Kepegawaian - Eselon IV.B]
+    B --> C2[Kasubag Perencanaan dan Keuangan - Eselon IV.B]
+    A --> D1[Kasi Pemerintahan - Eselon IV.A]
+    A --> D2[Kasi Pemberdayaan Masyarakat dan Pembangunan - Eselon IV.A]
+    A --> D3[Kasi Ketentraman dan Ketertiban Umum - Eselon IV.A]
+    A --> D4[Kasi Pelayanan Umum - Eselon IV.A]
+
+    A --> KEL1[Lurah Bintan - Eselon IV.A]
+    KEL1 --> SK1[Sekretaris Kelurahan Bintan - Eselon IV.B]
+
+    A --> KEL2[Lurah Dumai Kota - Eselon IV.A]
+    KEL2 --> SK2[Sekretaris Kelurahan Dumai Kota - Eselon IV.B]
+
+    A --> KEL3[Lurah Laksamana - Eselon IV.A]
+    KEL3 --> SK3[Sekretaris Kelurahan Laksamana - Eselon IV.B]
+
+    A --> KEL4[Lurah Rimba Sekampung - Eselon IV.A]
+    KEL4 --> SK4[Sekretaris Kelurahan Rimba Sekampung - Eselon IV.B]
+
+    A --> KEL5[Lurah Sukajadi - Eselon IV.A]
+    KEL5 --> SK5[Sekretaris Kelurahan Sukajadi - Eselon IV.B]
