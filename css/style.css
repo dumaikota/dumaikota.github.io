@@ -123,3 +123,60 @@ nav.menu button:hover {
 .CodeMirror {
   font-size: 14px;
 }
+
+
+/* === THEME RESTORE PATCH: Dumai Kota Blue-Green Gradient === */
+
+/* Header: gradasi biru ke hijau */
+.header {
+  background: linear-gradient(90deg, #004d7a, #00796b);
+  color: white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Menu aktif & hover */
+nav.menu button:hover,
+nav.menu button.active {
+  background: linear-gradient(90deg, #00796b, #004d7a);
+  color: #fff;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Tombol umum */
+button, #login-btn {
+  background: linear-gradient(90deg, #007bff, #00a86b);
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+button:hover, #login-btn:hover {
+  background: linear-gradient(90deg, #0056b3, #006f4c);
+}
+
+/* Form Input */
+input, textarea, select {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px;
+  background-color: #fdfdfd;
+}
+
+/* Background konten utama */
+main#app {
+  background: linear-gradient(to bottom, #f8f9fa, #eaf3ef);
+  min-height: calc(100vh - 160px);
+  padding: 20px;
+  border-top: 1px solid #ddd;
+}
+
+/* Footer: ringan, kontras, tetap Helvetica */
+#footer-quote {
+  background: linear-gradient(90deg, #004d7a, #00796b);
+  color: #fff;
+  font-family: 'Helvetica', sans-serif;
+  padding: 25px 10px;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.2);
+}
