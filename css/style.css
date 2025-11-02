@@ -49,3 +49,38 @@ nav.menu button.active {
     margin: 4px 0;
   }
 }
+
+/* ============ FIX HEADER LOGO ============ */
+.header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #004d7a 0%, #00796b 100%);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+  color: #fff;
+  z-index: 10;
+}
+
+.logo-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.logo-group img {
+  height: 52px;
+  max-height: 52px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* pastikan area hero tidak menimpa header */
+.hero {
+  margin-top: 0;
+  position: relative;
+  z-index: 1;
+}
