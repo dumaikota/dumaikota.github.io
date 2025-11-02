@@ -1,31 +1,158 @@
 {
-  "camat": { "role": "Camat Dumai Kota" },
-  "sekcam": { "role": "Sekretaris Camat Dumai Kota" },
+  "camat": { 
+    "role": "Camat Dumai Kota",
+    "password": "iconmantap"
+  },
+  "sekcam": { 
+    "role": "Sekretaris Camat Dumai Kota",
+    "password": "kotaidaman"
+  },
 
-  "subag_tu": { "role": "Subbag Umum dan Kepegawaian" },
-  "subag_program": { "role": "Subbag Program dan Keuangan" },
+  "subbag_umum_kepegawaian": { 
+    "role": "Subbag Umum dan Kepegawaian",
+    "password": "kotaidaman"
+  },
+  "subbag_perencanaan_keuangan": { 
+    "role": "Subbag Perencanaan dan Keuangan",
+    "password": "kotaidaman"
+  },
 
-  "kasi_pemerintahan": { "role": "Kasi Pemerintahan" },
-  "kasi_pembangunan": { "role": "Kasi Pembangunan dan Pemberdayaan Masyarakat" },
-  "kasi_trantib": { "role": "Kasi Ketentraman dan Ketertiban Umum" },
-  "kasi_ekbang": { "role": "Kasi Ekonomi dan Pembangunan" },
+  "kasi_pemerintahan": { 
+    "role": "Kasi Pemerintahan",
+    "password": "kotaidaman"
+  },
+  "kasi_pemberdayaan": { 
+    "role": "Kasi Pemberdayaan Masyarakat",
+    "password": "kotaidaman"
+  },
+  "kasi_ekbang": { 
+    "role": "Kasi Ekonomi dan Pembangunan",
+    "password": "kotaidaman"
+  },
+  "kasi_kesos": { 
+    "role": "Kasi Kesejahteraan Sosial",
+    "password": "kotaidaman"
+  },
+  "kasi_trantib": { 
+    "role": "Kasi Ketentraman dan Ketertiban Umum",
+    "password": "kotaidaman"
+  },
 
-  "lurah_bintan": { "role": "Lurah Bintan" },
-  "sekel_bintan": { "role": "Sekretaris Kelurahan Bintan" },
+  "lurah_bintan": { 
+    "role": "Lurah Bintan",
+    "password": "kotaidaman"
+  },
+  "seklur_bintan": { 
+    "role": "Sekretaris Kelurahan Bintan",
+    "password": "kotaidaman"
+  },
+  "kasi_pem_bintan": { 
+    "role": "Kasi Pemerintahan",
+    "password": "kotaidaman"
+  },
+  "kasi_trantib_bintan": { 
+    "role": "Kasi Ketentraman dan Ketertiban",
+    "password": "kotaidaman"
+  },
+  "kasi_pm_kesos_bintan": { 
+    "role": "Kasi Pemberdayaan Masyarakat dan Kesejahteraan Sosial",
+    "password": "kotaidaman"
+  },
 
-  "lurah_dumai_kota": { "role": "Lurah Dumai Kota" },
-  "sekel_dumai_kota": { "role": "Sekretaris Kelurahan Dumai Kota" },
+  "lurah_dumai_kota": { 
+    "role": "Lurah Dumai Kota",
+    "password": "kotaidaman"
+  },
+  "seklur_dumai_kota": { 
+    "role": "Sekretaris Kelurahan Dumai Kota",
+    "password": "kotaidaman"
+  },
+  "kasi_pem_dumai_kota": { 
+    "role": "Kasi Pemerintahan",
+    "password": "kotaidaman"
+  },
+  "kasi_trantib_dumai_kota": { 
+    "role": "Kasi Ketentraman dan Ketertiban",
+    "password": "kotaidaman"
+  },
+  "kasi_pm_kesos_dumai_kota": { 
+    "role": "Kasi Pemberdayaan Masyarakat dan Kesejahteraan Sosial",
+    "password": "kotaidaman"
+  },
 
-  "lurah_laksamana": { "role": "Lurah Laksamana" },
-  "sekel_laksamana": { "role": "Sekretaris Kelurahan Laksamana" },
+  "lurah_laksamana": { 
+    "role": "Lurah Laksamana",
+    "password": "kotaidaman"
+  },
+  "seklur_laksamana": { 
+    "role": "Sekretaris Kelurahan Laksamana",
+    "password": "kotaidaman"
+  },
+  "kasi_pem_laksamana": { 
+    "role": "Kasi Pemerintahan",
+    "password": "kotaidaman"
+  },
+  "kasi_trantib_laksamana": { 
+    "role": "Kasi Ketentraman dan Ketertiban",
+    "password": "kotaidaman"
+  },
+  "kasi_pm_kesos_laksamana": { 
+    "role": "Kasi Pemberdayaan Masyarakat dan Kesejahteraan Sosial",
+    "password": "kotaidaman"
+  },
 
-  "lurah_rimba": { "role": "Lurah Rimba Sekampung" },
-  "sekel_rimba": { "role": "Sekretaris Kelurahan Rimba Sekampung" },
+  "lurah_rimba": { 
+    "role": "Lurah Rimba Sekampung",
+    "password": "kotaidaman"
+  },
+  "seklur_rimba": { 
+    "role": "Sekretaris Kelurahan Rimba Sekampung",
+    "password": "kotaidaman"
+  },
+  "kasi_pem_rimba": { 
+    "role": "Kasi Pemerintahan",
+    "password": "kotaidaman"
+  },
+  "kasi_trantib_rimba": { 
+    "role": "Kasi Ketentraman dan Ketertiban",
+    "password": "kotaidaman"
+  },
+  "kasi_pm_kesos_rimba": { 
+    "role": "Kasi Pemberdayaan Masyarakat dan Kesejahteraan Sosial",
+    "password": "kotaidaman"
+  },
 
-  "lurah_sukajadi": { "role": "Lurah Sukajadi" },
-  "sekel_sukajadi": { "role": "Sekretaris Kelurahan Sukajadi" },
+  "lurah_sukajadi": { 
+    "role": "Lurah Sukajadi",
+    "password": "kotaidaman"
+  },
+  "seklur_sukajadi": { 
+    "role": "Sekretaris Kelurahan Sukajadi",
+    "password": "kotaidaman"
+  },
+  "kasi_pem_sukajadi": { 
+    "role": "Kasi Pemerintahan",
+    "password": "kotaidaman"
+  },
+  "kasi_trantib_sukajadi": { 
+    "role": "Kasi Ketentraman dan Ketertiban",
+    "password": "kotaidaman"
+  },
+  "kasi_pm_kesos_sukajadi": { 
+    "role": "Kasi Pemberdayaan Masyarakat dan Kesejahteraan Sosial",
+    "password": "kotaidaman"
+  },
 
-  "operator_kecamatan": { "role": "Operator Kecamatan" },
-  "operator_kelurahan": { "role": "Operator Kelurahan" },
-  "admin": { "role": "Administrator Sistem" }
+  "operator_kecamatan": { 
+    "role": "Operator Kecamatan",
+    "password": "kotaidaman"
+  },
+  "operator_kelurahan": { 
+    "role": "Operator Kelurahan",
+    "password": "kotaidaman"
+  },
+  "admin": { 
+    "role": "Administrator Sistem",
+    "password": "kotaidaman"
+  }
 }
