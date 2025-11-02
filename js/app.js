@@ -1,8 +1,11 @@
+// === IMPORT DARI STORAGE.JS ===
 import { getUser, setUser, addLog } from './storage.js';
 
-let quotes = [], users = {}, cache = {};
+let quotes = [];
+let users = {};
+let cache = {}; // untuk menyimpan halaman yang sudah di-load
 
-// ==== LOAD DATA ====
+// === LOAD DATA QUOTES DAN USERS ===
 async function loadQuotes() {
   try {
     const r = await fetch('data/quotes.json');
@@ -21,7 +24,7 @@ async function loadUsers() {
   }
 }
 
-// ==== QUOTES & CLOCK ====
+// === TAMPILAN KUTIPAN HARIAN ===
 function getRandomQuote() {
   return quotes[Math.floor(Math.random() * quotes.length)] || "Memuat kutipan...";
 }
@@ -33,183 +36,138 @@ function updateQuote() {
   setTimeout(() => {
     el.style.opacity = 1;
     el.textContent = getRandomQuote();
-  }, 300);
+  }, 500);
 }
-setInterval(updateQuote, 300000);
 
-function updateTime() {
+// === TAMPILAN JAM REAL-TIME ===
+function updateClock() {
+  const el = document.getElementById('datetime');
+  if (!el) return;
   const now = new Date();
-  const t = document.getElementById('datetime');
-  if (t)
-    t.textContent =
-      now.toLocaleString('id-ID', {
-        weekday: 'long',
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-      }) + ' WIB';
+  el.textContent = now.toLocaleString('id-ID', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
 }
-setInterval(updateTime, 1000);
 
-// ==== LOGIN HANDLER ====
-document.addEventListener('DOMContentLoaded', async () => {
-  await loadQuotes();
+// === GANTI HALAMAN (NAVIGASI DINAMIS) ===
+async function loadPage(page) {
+  const app = document.getElementById('app');
+  if (!app) return;
+
+  if (cache[page]) {
+    app.innerHTML = cache[page];
+    return;
+  }
+
+  try {
+    const res = await fetch(`html/${page}.html`);
+    const html = await res.text();
+    cache[page] = html;
+    app.innerHTML = html;
+  } catch (err) {
+    app.innerHTML = `<p style="color:red;">Gagal memuat halaman ${page}.html</p>`;
+  }
+}
+
+// === LOGIN HANDLER ===
+async function initLogin() {
   await loadUsers();
-  updateQuote();
-  updateTime();
 
-  const u = getUser();
-  const info = document.getElementById('user-info');
-  if (u) {
-    info.innerHTML = `👤 ${u.role} | <button id="logout-btn">Logout</button>`;
-    document.getElementById('logout-btn').onclick = () => {
-      setUser(null);
-      location.reload();
-    };
-  }
+  const loginBtn = document.getElementById('login-btn');
+  const status = document.getElementById('login-status');
+  const inputUser = document.getElementById('username');
 
-  const btn = document.getElementById('login-btn');
-  if (btn) {
-    const uInput = document.getElementById('username');
-    if (uInput) uInput.focus();
-    btn.onclick = () => {
-      const usr = document.getElementById('username').value.trim().toLowerCase();
-      const pwd = document.getElementById('password').value.trim();
-      const infoMsg = document.getElementById('login-status');
+  loginBtn.addEventListener('click', () => {
+    const uname = inputUser.value.trim().toLowerCase();
+    const user = users[uname];
 
-      if (users[usr] && pwd === '123') {
-        setUser({ username: usr, role: users[usr].role });
-        addLog(`Login: ${users[usr].role}`);
-        infoMsg.textContent = 'Login berhasil!';
-        setTimeout(() => location.reload(), 700);
-      } else {
-        infoMsg.textContent = 'Username atau password salah.';
-      }
-    };
-  }
-});
-
-// ==== SPA LOADER ====
-export async function loadPage(page) {
-  const main = document.getElementById('app');
-  main.classList.add('fade-out');
-
-  setTimeout(async () => {
-    if (page === 'logout') {
-      setUser(null);
-      location.reload();
+    if (!uname) {
+      status.textContent = "Masukkan nama pengguna terlebih dahulu.";
+      status.style.color = "orange";
       return;
     }
 
-    // Simpan modul di cache biar lebih cepat
-    if (!cache[page]) {
-      const res = await fetch(`html/${page}.html`);
-      cache[page] = await res.text();
-    }
+    if (user) {
+      setUser({ username: uname, role: user.role });
+      addLog(`Login sebagai ${user.role}`);
 
-    main.innerHTML = cache[page];
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.getElementById('login-section').style.display = 'none';
+      document.getElementById('main-menu').classList.remove('hidden');
 
-    // animasi transisi
-    main.classList.remove('fade-out');
-    main.classList.add('fade-in');
-    setTimeout(() => main.classList.remove('fade-in'), 400);
+      const info = document.getElementById('user-info');
+      info.innerHTML = `
+        👤 <b>${user.role}</b>
+        <button id="logout-btn">Keluar</button>
+      `;
+      document.getElementById('logout-btn').addEventListener('click', logout);
 
-    // tandai menu aktif
-    document.querySelectorAll('nav.menu button').forEach((btn) => {
-      btn.classList.toggle('active', btn.dataset.page === page);
-    });
-
-    initMarkdownEditors();
-    applyFormAccess(page);
-  }, 200);
-}
-
-document.addEventListener('click', (e) => {
-  if (e.target.matches('nav button[data-page]')) {
-    loadPage(e.target.getAttribute('data-page'));
-  }
-});
-
-// ==== RBAC MENU ====
-function applyRoleAccess() {
-  const u = getUser();
-  if (!u) return;
-  const menu = document.getElementById('main-menu');
-  if (!menu) return;
-  menu.querySelectorAll('button[data-page]').forEach((b) => (b.style.display = 'inline-block'));
-  const hide = (p) =>
-    menu
-      .querySelectorAll(`button[data-page="${p}"]`)
-      .forEach((b) => (b.style.display = 'none'));
-
-  if (u.role.includes('Operator')) {
-    hide('disposisi'); hide('notadinas'); hide('surattugas'); hide('export');
-  } else if (u.role.includes('Lurah') || u.role.includes('Sekretaris Kelurahan')) {
-    hide('disposisi'); hide('notadinas'); hide('export');
-  } else if (u.role.includes('Subbag') || u.role.includes('Sekretaris Camat')) {
-    hide('export');
-  } else if (u.role.includes('Administrator Sistem')) {
-    hide('disposisi'); hide('notadinas'); hide('surattugas'); hide('agenda');
-  }
-}
-document.addEventListener('DOMContentLoaded', applyRoleAccess);
-
-// ==== RBAC FORM ACCESS ====
-function applyFormAccess(page) {
-  const u = getUser();
-  if (!u) return;
-
-  const disableAll = () =>
-    document
-      .querySelectorAll('input,textarea,select,button[type="submit"]')
-      .forEach((e) => (e.disabled = true));
-
-  switch (page) {
-    case 'disposisi':
-    case 'notadinas':
-    case 'surattugas':
-      if (u.role.includes('Operator')) disableAll();
-      if (u.role.includes('Lurah') && page !== 'surattugas') disableAll();
-      break;
-  }
-
-  if (['disposisi', 'notadinas', 'surattugas'].includes(page)) {
-    const statusSel = document.getElementById('status');
-    if (statusSel) {
-      const allowed = [];
-      if (u.role.includes('Camat')) allowed.push('Ditandatangani Camat');
-      else if (u.role.includes('Sekretaris Camat')) allowed.push('Diverifikasi Sekcam');
-      else allowed.push('Draft');
-      [...statusSel.options].forEach((opt) => {
-        if (!allowed.includes(opt.value)) opt.disabled = true;
-      });
-    }
-  }
-}
-
-// ==== MARKDOWN EDITOR ====
-async function initMarkdownEditors() {
-  const targets = document.querySelectorAll('textarea#isi,textarea.markdown-area');
-  if (!targets.length) return;
-
-  if (typeof SimpleMDE === 'undefined') {
-    await import('https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js');
-  }
-
-  targets.forEach((el) => {
-    if (el.dataset.mde !== 'true') {
-      new SimpleMDE({
-        element: el,
-        spellChecker: false,
-        placeholder: 'Tulis isi surat...',
-        toolbar: ['bold', 'italic', 'heading', '|', 'unordered-list', 'ordered-list', '|', 'link', 'table', '|', 'preview'],
-        status: false,
-      });
-      el.dataset.mde = 'true';
+      status.textContent = "";
+      loadPage('home');
+    } else {
+      status.textContent = "❌ Nama pengguna tidak dikenal.";
+      status.style.color = "red";
     }
   });
 }
+
+// === LOGOUT HANDLER ===
+function logout() {
+  localStorage.removeItem('user');
+  addLog('Logout pengguna');
+  document.getElementById('main-menu').classList.add('hidden');
+  document.getElementById('login-section').style.display = 'block';
+  document.getElementById('user-info').textContent = "";
+  document.getElementById('app').innerHTML = "";
+}
+
+// === INISIALISASI MENU ===
+function initMenu() {
+  const menu = document.getElementById('main-menu');
+  if (!menu) return;
+
+  menu.addEventListener('click', (e) => {
+    if (e.target.tagName === 'BUTTON') {
+      const page = e.target.dataset.page;
+      if (page === 'logout') {
+        logout();
+      } else {
+        loadPage(page);
+        document.querySelectorAll('nav.menu button')
+          .forEach(btn => btn.classList.remove('active'));
+        e.target.classList.add('active');
+      }
+    }
+  });
+}
+
+// === SAAT HALAMAN DIMUAT ===
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadQuotes();
+  setInterval(updateQuote, 8000);
+  updateQuote();
+  setInterval(updateClock, 1000);
+
+  const u = getUser();
+
+  if (u) {
+    // Jika user masih login
+    document.getElementById('login-section').style.display = 'none';
+    document.getElementById('main-menu').classList.remove('hidden');
+    const info = document.getElementById('user-info');
+    info.innerHTML = `
+      👤 <b>${u.role}</b>
+      <button id="logout-btn">Keluar</button>
+    `;
+    document.getElementById('logout-btn').addEventListener('click', logout);
+    loadPage('home');
+  } else {
+    initLogin();
+  }
+
+  initMenu();
+});
