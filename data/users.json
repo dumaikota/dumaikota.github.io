@@ -1,158 +1,31 @@
 {
-  "camat": { 
-    "role": "Camat Dumai Kota",
-    "password": "aWNvbm1hbnRhcA=="
-  },
-  "sekcam": { 
-    "role": "Sekretaris Camat Dumai Kota",
-    "password": "a290YWlkYW1hbg=="
-  },
+  "camat": { "role": "Camat Dumai Kota" },
+  "sekcam": { "role": "Sekretaris Camat Dumai Kota" },
 
-  "subbag_umum_kepegawaian": { 
-    "role": "Subbag Umum dan Kepegawaian",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "subbag_perencanaan_keuangan": { 
-    "role": "Subbag Perencanaan dan Keuangan",
-    "password": "a290YWlkYW1hbg=="
-  },
+  "subag_tu": { "role": "Subbag Umum dan Kepegawaian" },
+  "subag_program": { "role": "Subbag Program dan Keuangan" },
 
-  "kasi_pemerintahan": { 
-    "role": "Kasi Pemerintahan",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "kasi_pemberdayaan": { 
-    "role": "Kasi Pemberdayaan Masyarakat",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "kasi_ekbang": { 
-    "role": "Kasi Ekonomi dan Pembangunan",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "kasi_kesos": { 
-    "role": "Kasi Kesejahteraan Sosial",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "kasi_trantib": { 
-    "role": "Kasi Ketentraman dan Ketertiban Umum",
-    "password": "a290YWlkYW1hbg=="
-  },
+  "kasi_pemerintahan": { "role": "Kasi Pemerintahan" },
+  "kasi_pembangunan": { "role": "Kasi Pembangunan dan Pemberdayaan Masyarakat" },
+  "kasi_trantib": { "role": "Kasi Ketentraman dan Ketertiban Umum" },
+  "kasi_ekbang": { "role": "Kasi Ekonomi dan Pembangunan" },
 
-  "lurah_bintan": { 
-    "role": "Lurah Bintan",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "seklur_bintan": { 
-    "role": "Sekretaris Kelurahan Bintan",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "kasi_pem_bintan": { 
-    "role": "Kasi Pemerintahan",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "kasi_trantib_bintan": { 
-    "role": "Kasi Ketentraman dan Ketertiban",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "kasi_pm_kesos_bintan": { 
-    "role": "Kasi Pemberdayaan Masyarakat dan Kesejahteraan Sosial",
-    "password": "a290YWlkYW1hbg=="
-  },
+  "lurah_bintan": { "role": "Lurah Bintan" },
+  "sekel_bintan": { "role": "Sekretaris Kelurahan Bintan" },
 
-  "lurah_dumai_kota": { 
-    "role": "Lurah Dumai Kota",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "seklur_dumai_kota": { 
-    "role": "Sekretaris Kelurahan Dumai Kota",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "kasi_pem_dumai_kota": { 
-    "role": "Kasi Pemerintahan",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "kasi_trantib_dumai_kota": { 
-    "role": "Kasi Ketentraman dan Ketertiban",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "kasi_pm_kesos_dumai_kota": { 
-    "role": "Kasi Pemberdayaan Masyarakat dan Kesejahteraan Sosial",
-    "password": "a290YWlkYW1hbg=="
-  },
+  "lurah_dumai_kota": { "role": "Lurah Dumai Kota" },
+  "sekel_dumai_kota": { "role": "Sekretaris Kelurahan Dumai Kota" },
 
-  "lurah_laksamana": { 
-    "role": "Lurah Laksamana",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "seklur_laksamana": { 
-    "role": "Sekretaris Kelurahan Laksamana",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "kasi_pem_laksamana": { 
-    "role": "Kasi Pemerintahan",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "kasi_trantib_laksamana": { 
-    "role": "Kasi Ketentraman dan Ketertiban",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "kasi_pm_kesos_laksamana": { 
-    "role": "Kasi Pemberdayaan Masyarakat dan Kesejahteraan Sosial",
-    "password": "a290YWlkYW1hbg=="
-  },
+  "lurah_laksamana": { "role": "Lurah Laksamana" },
+  "sekel_laksamana": { "role": "Sekretaris Kelurahan Laksamana" },
 
-  "lurah_rimba": { 
-    "role": "Lurah Rimba Sekampung",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "seklur_rimba": { 
-    "role": "Sekretaris Kelurahan Rimba Sekampung",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "kasi_pem_rimba": { 
-    "role": "Kasi Pemerintahan",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "kasi_trantib_rimba": { 
-    "role": "Kasi Ketentraman dan Ketertiban",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "kasi_pm_kesos_rimba": { 
-    "role": "Kasi Pemberdayaan Masyarakat dan Kesejahteraan Sosial",
-    "password": "a290YWlkYW1hbg=="
-  },
+  "lurah_rimba": { "role": "Lurah Rimba Sekampung" },
+  "sekel_rimba": { "role": "Sekretaris Kelurahan Rimba Sekampung" },
 
-  "lurah_sukajadi": { 
-    "role": "Lurah Sukajadi",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "seklur_sukajadi": { 
-    "role": "Sekretaris Kelurahan Sukajadi",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "kasi_pem_sukajadi": { 
-    "role": "Kasi Pemerintahan",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "kasi_trantib_sukajadi": { 
-    "role": "Kasi Ketentraman dan Ketertiban",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "kasi_pm_kesos_sukajadi": { 
-    "role": "Kasi Pemberdayaan Masyarakat dan Kesejahteraan Sosial",
-    "password": "a290YWlkYW1hbg=="
-  },
+  "lurah_sukajadi": { "role": "Lurah Sukajadi" },
+  "sekel_sukajadi": { "role": "Sekretaris Kelurahan Sukajadi" },
 
-  "operator_kecamatan": { 
-    "role": "Operator Kecamatan",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "operator_kelurahan": { 
-    "role": "Operator Kelurahan",
-    "password": "a290YWlkYW1hbg=="
-  },
-  "admin": { 
-    "role": "Administrator Sistem",
-    "password": "a290YWlkYW1hbg=="
-  }
+  "operator_kecamatan": { "role": "Operator Kecamatan" },
+  "operator_kelurahan": { "role": "Operator Kelurahan" },
+  "admin": { "role": "Administrator Sistem" }
 }

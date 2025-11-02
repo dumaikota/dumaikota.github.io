@@ -1,91 +1,64 @@
 <!DOCTYPE html>
 <html lang="id">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Aplikasi Kontrol Manajemen Camat Dumai Kota
-  </title>
-  <link href="css/style.css" rel="stylesheet"/>
-  <link href="assets/img/dumai.png" rel="icon" type="image/png"/>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplikasi Kontrol Manajemen Camat Dumai Kota</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="assets/img/dumai.png">
+
   <!-- Link untuk font Roboto -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js">
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js">
-  </script>
-  <script src="js/app.js" type="module">
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+  <script type="module" src="js/app.js"></script>
   <!-- SimpleMDE (Markdown Editor) -->
-  <link href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css" rel="stylesheet"/>
-  <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js">
-  </script>
- </head>
- <body>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+  <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+</head>
+<body>
   <!-- HEADER -->
   <header class="header">
-   <div class="logo-group">
-    <img alt="Logo Dumai" class="logo-left" src="assets/img/dumai.png"/>
-    <img alt="Logo Dumai Idaman" class="logo-center" src="assets/img/dumai_idaman.png"/>
-    <img alt="Logo ASN" class="logo-right" src="assets/img/asn.png"/>
-   </div>
-   <div class="user-info" id="user-info">
-   </div>
+    <div class="logo-group">
+      <img src="assets/img/dumai.png" alt="Logo Dumai" class="logo-left">
+      <img src="assets/img/dumai_idaman.png" alt="Logo Dumai Idaman" class="logo-center">
+      <img src="assets/img/asn.png" alt="Logo ASN" class="logo-right">
+    </div>
+    <div id="user-info" class="user-info"></div>
   </header>
+
   <!-- LOGIN SECTION -->
   <div id="login-section">
-   <h2>
-    Login Pengguna
-   </h2>
-   <input id="username" placeholder="Username" required="" type="text"/>
-   <input id="password" placeholder="Password" required="" type="password"/>
-   <button id="login-btn">
-    Masuk
-   </button>
-   <p id="login-status">
-   </p>
+    <h2>Login Pengguna</h2>
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button id="login-btn">Masuk</button>
+    <p id="login-status"></p>
   </div>
+
   <!-- NAVIGATION MENU -->
   <nav class="menu hidden" id="main-menu">
-   <button data-page="home">
-    Beranda
-   </button>
-   <button data-page="disposisi">
-    Disposisi
-   </button>
-   <button data-page="notadinas">
-    Nota Dinas
-   </button>
-   <button data-page="surattugas">
-    Surat Tugas
-   </button>
-   <button data-page="agenda">
-    Agenda
-   </button>
-   <button data-page="export">
-    Export/Import
-   </button>
-   <button data-page="logout">
-    Keluar
-   </button>
+    <button data-page="home">Beranda</button>
+    <button data-page="disposisi">Disposisi</button>
+    <button data-page="notadinas">Nota Dinas</button>
+    <button data-page="surattugas">Surat Tugas</button>
+    <button data-page="agenda">Agenda</button>
+    <button data-page="export">Export/Import</button>
+    <button data-page="logout">Keluar</button>
   </nav>
-  <main id="app">
-  </main>
+
+  <main id="app"></main>
+
   <!-- FOOTER -->
   <footer id="footer-quote">
-   <div id="footer-sign">
-    💬
-    <b>
-     Quotes by Camat Dumai Kota
-    </b>
-   </div>
-   <div class="quote-text" id="daily-quote">
-   </div>
-   <div id="datetime">
-   </div>
+    <div id="footer-sign">💬 <b>Quotes by Camat Dumai Kota</b></div>
+    <div id="daily-quote" class="quote-text"></div>
+    <div id="datetime"></div>
   </footer>
+
   <script>
-   document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
       const u = localStorage.getItem('user');
       if(u) {
         document.getElementById('login-section').style.display = 'none';
@@ -93,5 +66,5 @@
       }
     });
   </script>
- </body>
+</body>
 </html>
