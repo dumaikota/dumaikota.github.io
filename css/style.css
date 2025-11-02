@@ -1,168 +1,51 @@
-/* ======== THEME DUMAI KOTA v2 - BLUE-GREEN SOFT GRADIENT ======== */
-
-/* FONT & BASE */
-body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  background: linear-gradient(to bottom, #f9fbfc, #eef5f3);
-  color: #222;
-}
-
-/* HEADERS */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 24px;
-  background: linear-gradient(135deg, #004d7a 0%, #00796b 100%);
-  box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+/* ==== HERO SECTION (untuk home.html) ==== */
+.hero {
+  position: relative;
+  background: 
+    linear-gradient(to bottom right, rgba(0,120,170,0.7), rgba(0,191,166,0.7)),
+    url("../assets/img/kantor.png") center/cover no-repeat;
+  height: 65vh;
   color: #fff;
-}
-
-.logo-group img {
-  max-height: 52px;
-  margin: 0 10px;
-}
-
-#user-info {
-  color: #fff;
-  font-weight: 500;
-}
-
-/* LOGIN SECTION */
-#login-section {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
   text-align: center;
-  padding: 20px;
-  background: linear-gradient(180deg, #e7f3f0, #f4f9fa);
 }
 
-#login-section h2 {
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: #003c57;
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 1.5rem;
+  max-width: 700px;
 }
 
-#login-section input {
-  padding: 12px;
-  margin: 8px 0;
-  width: 100%;
-  max-width: 320px;
-  border-radius: 6px;
-  border: 1px solid #bbb;
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(to bottom, #ffffff, #f1f4f3);
-  transition: 0.2s;
-}
-
-#login-section input:focus {
-  outline: none;
-  border-color: #00796b;
-  box-shadow: 0 0 6px rgba(0,121,107,0.4);
-}
-
-#login-section button {
-  padding: 12px;
-  margin-top: 12px;
-  width: 100%;
-  max-width: 320px;
-  border: none;
-  border-radius: 6px;
-  color: #fff;
-  background: linear-gradient(90deg, #007bff, #00a86b);
+.hero-content h1 {
+  font-size: 2rem;
+  margin-bottom: 0.2rem;
   font-weight: 500;
-  cursor: pointer;
-  box-shadow: 0 3px 5px rgba(0,0,0,0.2);
-  transition: all 0.2s ease-in-out;
 }
 
-#login-section button:hover {
-  background: linear-gradient(90deg, #0056b3, #00796b);
-  transform: translateY(-1px);
+.hero-content h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
 }
 
-/* FORM INPUT DI MODUL */
-input, textarea, select, button {
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(to bottom, #ffffff, #f5f9f8);
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  padding: 8px;
+.hero-content p {
+  font-size: 1rem;
+  opacity: 0.9;
 }
 
-/* NAVIGATION MENU */
-nav.menu {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  background: linear-gradient(180deg, #f5f9f8, #e9f3f1);
-  padding: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-}
-
-nav.menu button {
-  background-color: transparent;
-  border: 1px solid transparent;
-  color: #004d7a;
-  padding: 10px 20px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: all 0.25s ease;
-}
-
-nav.menu button:hover, nav.menu button.active {
+nav.menu button.active {
   background: linear-gradient(90deg, #00796b, #004d7a);
   color: #fff;
   box-shadow: 0 3px 5px rgba(0,0,0,0.2);
 }
 
-/* KONTEN UTAMA */
-main#app {
-  background: linear-gradient(to bottom, #fafcfc 0%, #edf4f3 100%);
-  min-height: calc(100vh - 180px);
-  padding: 30px;
-  border-top: 1px solid #d6e2df;
-}
-
-/* FOOTER */
-#footer-quote {
-  background: linear-gradient(135deg, #004d7a 0%, #00796b 100%);
-  color: #fff;
-  font-family: 'Helvetica', sans-serif;
-  text-align: center;
-  padding: 25px 10px;
-  font-size: 14px;
-  box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
-}
-
-#footer-sign {
-  font-size: 16px;
-  font-weight: bold;
-  letter-spacing: 0.3px;
-}
-
-#daily-quote {
-  margin-top: 8px;
-  font-style: italic;
-  opacity: 0.9;
-}
-
-#datetime {
-  margin-top: 8px;
-  font-size: 12px;
-  opacity: 0.8;
-}
-
-/* Markdown Editor */
-.CodeMirror {
-  font-size: 14px;
-  border-radius: 6px;
-  background: linear-gradient(to bottom, #ffffff, #f4f8f7);
+/* Responsif menu */
+@media (max-width: 600px) {
+  nav.menu button {
+    flex: 1 1 100%;
+    margin: 4px 0;
+  }
 }
