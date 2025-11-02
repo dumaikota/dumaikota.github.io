@@ -1,28 +1,28 @@
 ```mermaid
 graph TD
-    A[Camat Dumai Kota<br/>Eselon III.A]
-    A --> B[Sekretaris Kecamatan<br/>Eselon III.B]
-    B --> C1[Kasubag Umum dan Kepegawaian<br/>Eselon IV.B]
-    B --> C2[Kasubag Perencanaan dan Keuangan<br/>Eselon IV.B]
-    A --> D1[Kasi Pemerintahan<br/>Eselon IV.A]
-    A --> D2[Kasi Pemberdayaan Masyarakat dan Pembangunan<br/>Eselon IV.A]
-    A --> D3[Kasi Ketentraman dan Ketertiban Umum<br/>Eselon IV.A]
-    A --> D4[Kasi Pelayanan Umum<br/>Eselon IV.A]
+    A[Camat Dumai Kota - Eselon III.A]
+    A --> B[Sekretaris Kecamatan - Eselon III.B]
+    B --> C1[Kasubag Umum dan Kepegawaian - Eselon IV.B]
+    B --> C2[Kasubag Perencanaan dan Keuangan - Eselon IV.B]
+    A --> D1[Kasi Pemerintahan - Eselon IV.A]
+    A --> D2[Kasi Pemberdayaan Masyarakat dan Pembangunan - Eselon IV.A]
+    A --> D3[Kasi Ketentraman dan Ketertiban Umum - Eselon IV.A]
+    A --> D4[Kasi Pelayanan Umum - Eselon IV.A]
 
-    A --> KEL1[Lurah Bintan<br/>Eselon IV.A]
-    KEL1 --> SK1[Sekretaris Kelurahan Bintan<br/>Eselon IV.B]
+    A --> KEL1[Lurah Bintan - Eselon IV.A]
+    KEL1 --> SK1[Sekretaris Kelurahan Bintan - Eselon IV.B]
 
-    A --> KEL2[Lurah Dumai Kota<br/>Eselon IV.A]
-    KEL2 --> SK2[Sekretaris Kelurahan Dumai Kota<br/>Eselon IV.B]
+    A --> KEL2[Lurah Dumai Kota - Eselon IV.A]
+    KEL2 --> SK2[Sekretaris Kelurahan Dumai Kota - Eselon IV.B]
 
-    A --> KEL3[Lurah Laksamana<br/>Eselon IV.A]
-    KEL3 --> SK3[Sekretaris Kelurahan Laksamana<br/>Eselon IV.B]
+    A --> KEL3[Lurah Laksamana - Eselon IV.A]
+    KEL3 --> SK3[Sekretaris Kelurahan Laksamana - Eselon IV.B]
 
-    A --> KEL4[Lurah Rimba Sekampung<br/>Eselon IV.A]
-    KEL4 --> SK4[Sekretaris Kelurahan Rimba Sekampung<br/>Eselon IV.B]
+    A --> KEL4[Lurah Rimba Sekampung - Eselon IV.A]
+    KEL4 --> SK4[Sekretaris Kelurahan Rimba Sekampung - Eselon IV.B]
 
-    A --> KEL5[Lurah Sukajadi<br/>Eselon IV.A]
-    KEL5 --> SK5[Sekretaris Kelurahan Sukajadi<br/>Eselon IV.B]
+    A --> KEL5[Lurah Sukajadi - Eselon IV.A]
+    KEL5 --> SK5[Sekretaris Kelurahan Sukajadi - Eselon IV.B]
 
 
 
