@@ -1,102 +1,94 @@
-.agenda-container {
-  max-width: 950px;
-  margin: 0 auto;
-  padding: 2rem;
-}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agenda Kegiatan | Kecamatan Dumai Kota</title>
 
-h1 {
-  text-align: center;
-  margin-bottom: 2rem;
-}
+  <!-- Gaya Utama -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/modules/agenda/agenda.css" />
+</head>
 
-/* 🔹 FORM INPUT */
-.agenda-form-section {
-  background: #f9fafc;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-}
+<body class="agenda-page">
+  <!-- Header otomatis -->
+  <div id="header"></div>
 
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1rem;
-}
+  <main class="agenda-container">
+    <h1>Agenda Kegiatan Kecamatan Dumai Kota</h1>
 
-.form-grid input,
-.form-grid select,
-.form-grid textarea {
-  padding: 0.6rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
+    <!-- 🔹 FORM INPUT -->
+    <section class="agenda-form-section">
+      <h2>Tambah Kegiatan Baru</h2>
 
-textarea {
-  grid-column: span 2;
-  min-height: 60px;
-  resize: vertical;
-}
+      <form id="agendaForm">
+        <div class="form-grid">
+          <input type="text" id="judul" placeholder="Judul kegiatan" required />
+          <input type="date" id="tanggal" required />
+          <input type="time" id="waktu" required />
+          <input type="text" id="lokasi" placeholder="Lokasi kegiatan" required />
 
-.btn-simpan,
-.btn-hapus,
-.btn-cetak {
-  margin-top: 1rem;
-  padding: 0.7rem 1.5rem;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-}
+          <select id="jenis" required>
+            <option value="">Pilih jenis kegiatan</option>
+            <option value="Undangan Umum">Undangan Umum</option>
+            <option value="Rapat">Rapat</option>
+            <option value="Kunjungan">Kunjungan</option>
+            <option value="Sosialisasi">Sosialisasi</option>
+            <option value="Bimtek">Bimtek</option>
+            <option value="manual">Lainnya (isi manual)</option>
+          </select>
 
-.btn-simpan { background-color: #198754; }
-.btn-hapus { background-color: #dc3545; }
-.btn-cetak { background-color: #0d6efd; }
+          <input type="text" id="jenisManual" placeholder="Isi jenis kegiatan (jika manual)" style="display:none;" />
 
-/* 🔹 FILTER */
-.agenda-controls {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-}
+          <input type="text" id="pejabat" placeholder="Pejabat yang menghadiri" required />
+          <textarea id="keterangan" placeholder="Keterangan tambahan (opsional)"></textarea>
+        </div>
 
-.agenda-controls input,
-.agenda-controls select {
-  padding: 0.6rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
+        <button type="submit" class="btn-simpan">+ Simpan Agenda</button>
+      </form>
+    </section>
 
-/* 🔹 LIST */
-.agenda-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
+    <!-- 🔹 FILTER & OPSI -->
+    <section class="agenda-controls">
+      <input type="text" id="searchInput" placeholder="Cari kegiatan..." />
+      <select id="filterSelect">
+        <option value="all">Semua Kegiatan</option>
+        <option value="Undangan Umum">Undangan Umum</option>
+        <option value="Rapat">Rapat</option>
+        <option value="Kunjungan">Kunjungan</option>
+        <option value="Sosialisasi">Sosialisasi</option>
+        <option value="Bimtek">Bimtek</option>
+      </select>
 
-.agenda-card {
-  border: 1px solid #e5e5e5;
-  border-radius: 12px;
-  padding: 1rem;
-  background: #fff;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  transition: all 0.2s ease;
-}
+      <select id="wilayahSelect">
+        <option value="Kecamatan Dumai Kota">Kecamatan Dumai Kota</option>
+        <option value="Kelurahan Dumai Kota">Kelurahan Dumai Kota</option>
+        <option value="Kelurahan Laksamana">Kelurahan Laksamana</option>
+        <option value="Kelurahan Rimba Sekampung">Kelurahan Rimba Sekampung</option>
+        <option value="Kelurahan Sukajadi">Kelurahan Sukajadi</option>
+        <option value="Kelurahan Bintan">Kelurahan Bintan</option>
+      </select>
 
-.agenda-card:hover {
-  transform: scale(1.01);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
+      <input type="text" id="waNumber" placeholder="Nomor WA tujuan (62...)" />
+      <button id="clearStorage" class="btn-hapus">Hapus Semua</button>
+    </section>
 
-.agenda-card pre {
-  white-space: pre-wrap;
-  font-family: inherit;
-  line-height: 1.5;
-}
+    <!-- 🔹 LIST AGENDA -->
+    <section id="agendaList" class="agenda-list"></section>
 
-.agenda-actions {
-  text-align: center;
-  margin-top: 2rem;
-}
+    <!-- 🔹 TOMBOL CETAK -->
+    <div class="agenda-actions">
+      <button id="printBtn" class="btn-cetak">🖨️ Cetak Laporan PDF</button>
+    </div>
+  </main>
+
+  <!-- Footer otomatis -->
+  <div id="footer"></div>
+
+  <!-- Script Layout dan Modul -->
+  <script src="/js/layout/layout.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="/modules/print/print.js"></script>
+  <script src="/modules/agenda/agenda.js"></script>
+</body>
+</html>
