@@ -1,33 +1,31 @@
-/* ===== Reset agar style modul tidak memengaruhi header/footer ===== */
-.agenda-container,
-.agenda-form-section,
-.agenda-list {
-  all: revert;
-  font-family: 'Helvetica', 'Roboto', sans-serif;
+body.agenda-page {
+  background: linear-gradient(135deg,
+    #fffde7 0%,   /* kuning muda */
+    #e8f5e9 25%,  /* hijau muda */
+    #e3f2fd 50%,  /* biru muda */
+    #f5f5f5 75%,  /* abu muda */
+    #fff8e1 100%  /* emas lembut */
+  );
+  min-height: 100vh;
+  font-family: 'Helvetica','Roboto',sans-serif;
 }
 
-/* ===== Struktur dasar ===== */
 .agenda-container {
-  max-width: 900px;
-  margin: 0 auto;
+  max-width: 950px;
+  margin: 2rem auto;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   padding: 2rem;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
   color: #222;
 }
 
-.role-info {
-  text-align: center;
-  color: #555;
-  margin-bottom: 1rem;
-  font-style: italic;
-}
-
-/* ===== FORM INPUT ===== */
 .agenda-form-section {
   background: #f9fafc;
   border: 1px solid #ddd;
@@ -48,7 +46,6 @@ h1 {
   padding: 0.6rem;
   border: 1px solid #ccc;
   border-radius: 8px;
-  font-size: 0.95rem;
 }
 
 textarea {
@@ -57,47 +54,49 @@ textarea {
   resize: vertical;
 }
 
-.btn-simpan,
-.btn-hapus {
-  margin-top: 1rem;
-  padding: 0.7rem 1.5rem;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-  font-weight: 600;
+.hidden-input {
+  display: none;
+  margin-top: .3rem;
+}
+.hidden-input.show {
+  display: block;
 }
 
-.btn-simpan {
-  background-color: #198754;
-}
-
-.btn-simpan:hover {
-  background-color: #157347;
-}
-
-.btn-hapus {
-  background-color: #dc3545;
-}
-
-.btn-hapus:hover {
-  background-color: #bb2d3b;
-}
-
-/* ===== FILTER & LIST ===== */
 .agenda-controls {
   display: flex;
-  gap: 1rem;
   flex-wrap: wrap;
-  align-items: center;
+  gap: 1rem;
   margin-bottom: 1.5rem;
 }
 
 .agenda-controls input,
 .agenda-controls select {
   padding: 0.6rem;
-  border: 1px solid #ccc;
   border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.btn-simpan,
+.btn-hapus,
+.btn-cetak {
+  margin-top: 1rem;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-simpan { background-color: #198754; }
+.btn-hapus { background-color: #dc3545; }
+.btn-cetak { background-color: #0d6efd; }
+
+.btn-simpan:hover,
+.btn-hapus:hover,
+.btn-cetak:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
 .agenda-list {
@@ -111,13 +110,6 @@ textarea {
   padding: 1rem;
   background: #fff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  transition: 0.2s;
-  user-select: text;
-}
-
-.agenda-card:hover {
-  transform: scale(1.01);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .agenda-card pre {
@@ -126,19 +118,7 @@ textarea {
   line-height: 1.5;
 }
 
-/* Banner fix biar logo tidak membesar */
-.agenda-banner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-bottom: 1rem;
+.agenda-actions {
+  text-align: center;
+  margin-top: 2rem;
 }
-
-.agenda-banner img {
-  max-width: 200px;
-  height: auto;
-  object-fit: contain;
-}
-
