@@ -1,3 +1,9 @@
+/* Reset semua gaya di dalam area modul agar tidak pengaruh ke header/footer */
+.agenda-container, .agenda-form-section, .agenda-list {
+  all: revert;
+}
+
+
 .agenda-container {
   max-width: 900px;
   margin: 0 auto;

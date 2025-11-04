@@ -1,66 +1,101 @@
-/* Header Styling */
-header {
-  background-color: var(--primary-color);
+/* ====== HEADER FIX - BARANG BARU RASA LAMA ====== */
+
+.site-header {
+  background: linear-gradient(90deg, #003366, #0055aa);
   color: white;
-  padding: 10px 15px;
-  border-bottom: 4px solid var(--accent-color);
-  font-family: var(--font-main);
+  text-align: center;
+  padding: 1rem 0;
+  border-bottom: 4px solid #004080;
 }
 
 .header-wrapper {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  gap: 0.6rem;
 }
 
+/* LOGO AREA */
 .header-logos {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
 }
 
-.logo {
-  height: 55px;
-  width: 55px;
+.header-logos img.logo {
+  width: 60px;
+  height: auto;
   object-fit: contain;
+  border: none;
+  margin: 0;
+  padding: 0;
 }
 
-.header-title {
-  flex: 1;
-  text-align: right;
+/* RESPONSIVE ADAPTATION */
+@media (max-width: 768px) {
+  .header-logos img.logo {
+    width: 45px;
+  }
 }
 
+/* TEXT SECTION */
 .header-title h1 {
   margin: 0;
-  font-size: 1.4em;
+  font-size: 1.3rem;
   font-weight: 700;
-  font-family: 'Noto Sans';
 }
 
 .header-title p {
   margin: 0;
-  font-size: 0.9em;
-  font-weight: 400;
-  color: #e0e0e0;
+  font-size: 0.95rem;
+  opacity: 0.9;
 }
 
+/* NAVBAR SECTION */
 .navbar {
-  margin-top: 10px;
-  text-align: center;
-  background: var(--secondary-color);
-  border-radius: 4px;
-  padding: 8px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #002855;
+  padding: 0.6rem 1rem;
+  margin-top: 0.5rem;
 }
 
-.navbar a {
+.navbar a.nav-home {
   color: white;
   text-decoration: none;
-  margin: 0 10px;
   font-weight: 600;
-  font-family: var(--font-main);
+  background: #004b91;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
 }
 
-.navbar a:hover {
-  text-decoration: underline;
+.navbar a.nav-home:hover {
+  background: #0060cc;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#username-display {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+#logout-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#logout-btn:hover {
+  background: #a3001f;
 }
