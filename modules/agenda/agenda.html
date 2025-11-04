@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agenda Kegiatan | Kecamatan Dumai Kota</title>
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/modules/agenda/agenda.css" />
+</head>
+<body class="agenda-page">
+  <div id="header"></div>
+
+  <main class="agenda-container">
+    <h1>Agenda Kegiatan Kecamatan Dumai Kota</h1>
+
+    <!-- Form Input Agenda -->
+    <section class="agenda-form-section">
+      <h2>Tambah Kegiatan Baru</h2>
+      <form id="agendaForm">
+        <div class="form-grid">
+          <input type="text" id="judul" placeholder="Judul kegiatan" required />
+          <input type="date" id="tanggal" required />
+          <input type="time" id="waktu" required />
+          <input type="text" id="lokasi" placeholder="Lokasi kegiatan" required />
+
+          <!-- Pilihan jenis + input manual -->
+          <select id="jenis" required>
+            <option value="">Pilih jenis kegiatan</option>
+            <option value="Undangan Umum">Undangan Umum</option>
+            <option value="Rapat">Rapat</option>
+            <option value="Kunjungan">Kunjungan</option>
+            <option value="Sosialisasi">Sosialisasi</option>
+            <option value="Bimtek">Bimtek</option>
+            <option value="manual">Lainnya (isi manual)</option>
+          </select>
+          <input type="text" id="jenisManual" placeholder="Isi jenis kegiatan (jika manual)" style="display:none;" />
+
+          <input type="text" id="pejabat" placeholder="Pejabat yang menghadiri" required />
+          <textarea id="keterangan" placeholder="Keterangan tambahan (opsional)"></textarea>
+        </div>
+        <button type="submit" class="btn-simpan">+ Simpan Agenda</button>
+      </form>
+    </section>
+
+    <!-- Filter dan Pencarian -->
+    <section class="agenda-controls">
+      <input type="text" id="searchInput" placeholder="Cari kegiatan..." />
+      <select id="filterSelect">
+        <option value="all">Semua Kegiatan</option>
+        <option value="Undangan Umum">Undangan Umum</option>
+        <option value="Rapat">Rapat</option>
+        <option value="Kunjungan">Kunjungan</option>
+        <option value="Sosialisasi">Sosialisasi</option>
+        <option value="Bimtek">Bimtek</option>
+      </select>
+      <button id="clearStorage" class="btn-hapus">Hapus Semua Data</button>
+    </section>
+
+    <!-- Daftar Agenda -->
+    <section id="agendaList" class="agenda-list"></section>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="/js/layout/layout.js"></script>
+  <script src="/modules/agenda/agenda.js"></script>
+</body>
+</html>
