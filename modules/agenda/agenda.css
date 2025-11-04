@@ -125,3 +125,20 @@ textarea {
   font-family: inherit;
   line-height: 1.5;
 }
+
+/* Banner fix biar logo tidak membesar */
+.agenda-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.agenda-banner img {
+  max-width: 200px;
+  height: auto;
+  object-fit: contain;
+}
+
