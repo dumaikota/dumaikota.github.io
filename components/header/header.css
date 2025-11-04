@@ -1,11 +1,25 @@
-/* ====== HEADER FIX - BARANG BARU RASA LAMA ====== */
+/* ===== HEADER ANIMATED GRADIENT FIX ===== */
 
 .site-header {
-  background: linear-gradient(90deg, #003366, #0055aa);
+  background: linear-gradient(90deg,
+    #002855,
+    #007bff,
+    #e83e8c,
+    #90ee90,
+    #228b22,
+    #daa520);
+  background-size: 400% 400%;
+  animation: gradientFlow 12s ease infinite;
   color: white;
   text-align: center;
   padding: 1rem 0;
-  border-bottom: 4px solid #004080;
+  border-bottom: 3px solid #ffd700;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .header-wrapper {
@@ -24,22 +38,19 @@
 }
 
 .header-logos img.logo {
-  width: 60px;
-  height: auto;
-  object-fit: contain;
-  border: none;
-  margin: 0;
-  padding: 0;
+  width: 60px !important;
+  height: auto !important;
+  object-fit: contain !important;
 }
 
-/* RESPONSIVE ADAPTATION */
+/* RESPONSIVE */
 @media (max-width: 768px) {
   .header-logos img.logo {
-    width: 45px;
+    width: 45px !important;
   }
 }
 
-/* TEXT SECTION */
+/* TITLE TEXT */
 .header-title h1 {
   margin: 0;
   font-size: 1.3rem;
@@ -49,15 +60,15 @@
 .header-title p {
   margin: 0;
   font-size: 0.95rem;
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
-/* NAVBAR SECTION */
+/* NAVBAR */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #002855;
+  background: rgba(0, 40, 85, 0.7);
   padding: 0.6rem 1rem;
   margin-top: 0.5rem;
 }

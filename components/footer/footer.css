@@ -1,15 +1,43 @@
-footer {
-  background-color: var(--primary-color);
+/* ===== FOOTER DUMAI KOTA FIX ===== */
+
+.site-footer {
+  background: linear-gradient(90deg,
+    #002855,
+    #007bff,
+    #e83e8c,
+    #90ee90,
+    #228b22,
+    #daa520);
+  background-size: 400% 400%;
+  animation: gradientFlow 12s ease infinite;
   color: white;
   text-align: center;
-  padding: 15px;
-  font-family: var(--font-main);
-  margin-top: 40px;
+  padding: 1.5rem 1rem;
+  border-top: 3px solid #ffd700;
 }
 
-#quote-box {
-  margin-top: 10px;
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.site-footer h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #fff8dc;
+}
+
+#quote-text {
   font-style: italic;
-  font-size: 0.9em;
-  color: #e0e0e0;
+  opacity: 0.95;
+  color: #fefefe;
+  transition: opacity 0.8s ease;
+}
+
+#datetime {
+  font-size: 0.9rem;
+  color: #ffffe0;
+  margin-top: 6px;
 }

@@ -1,6 +1,22 @@
-<footer>
-  <p>© <span id="year"></span> Kecamatan Dumai Kota — Pemerintah Kota Dumai</p>
-  <div id="quote-box">
-    <em id="quote-text">"Pelayanan publik yang baik berawal dari hati yang tulus."</em>
-  </div>
+<footer class="site-footer">
+  <h3>Quotes by Camat Dumai Kota</h3>
+  <p id="quote-text">"Pelayanan publik yang baik berawal dari hati yang tulus."</p>
+  <div id="datetime"></div>
+  <p style="margin-top:8px; font-size:0.85rem; color:#fff8dc;">
+    &copy; <span id="year"></span> Kecamatan Dumai Kota
+  </p>
+
+  <script src="quotes.js"></script>
+  <script>
+    // waktu realtime
+    function updateDateTime() {
+      const now = new Date();
+      const hari = now.toLocaleDateString("id-ID", { weekday: "long" });
+      const tanggal = now.toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+      const waktu = now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" });
+      document.getElementById("datetime").textContent = `${hari}, ${tanggal} — Pukul ${waktu} WIB`;
+    }
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+  </script>
 </footer>

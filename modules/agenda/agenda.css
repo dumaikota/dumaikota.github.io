@@ -1,8 +1,12 @@
-/* Reset semua gaya di dalam area modul agar tidak pengaruh ke header/footer */
-.agenda-container, .agenda-form-section, .agenda-list {
+/* ===== Reset agar style modul tidak memengaruhi header/footer ===== */
+.agenda-container,
+.agenda-form-section,
+.agenda-list {
   all: revert;
+  font-family: 'Helvetica', 'Roboto', sans-serif;
 }
 
+/* ===== Struktur dasar ===== */
 .agenda-container {
   max-width: 900px;
   margin: 0 auto;
@@ -12,16 +16,18 @@
 h1 {
   text-align: center;
   margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #222;
 }
 
 .role-info {
   text-align: center;
-  color: #444;
+  color: #555;
   margin-bottom: 1rem;
   font-style: italic;
 }
 
-/* FORM INPUT */
+/* ===== FORM INPUT ===== */
 .agenda-form-section {
   background: #f9fafc;
   border: 1px solid #ddd;
@@ -42,6 +48,7 @@ h1 {
   padding: 0.6rem;
   border: 1px solid #ccc;
   border-radius: 8px;
+  font-size: 0.95rem;
 }
 
 textarea {
@@ -58,23 +65,39 @@ textarea {
   border-radius: 8px;
   color: white;
   cursor: pointer;
+  font-weight: 600;
 }
 
 .btn-simpan {
   background-color: #198754;
 }
 
+.btn-simpan:hover {
+  background-color: #157347;
+}
+
 .btn-hapus {
   background-color: #dc3545;
 }
 
-/* FILTER & LIST */
+.btn-hapus:hover {
+  background-color: #bb2d3b;
+}
+
+/* ===== FILTER & LIST ===== */
 .agenda-controls {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
   align-items: center;
   margin-bottom: 1.5rem;
+}
+
+.agenda-controls input,
+.agenda-controls select {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
 .agenda-list {
