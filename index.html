@@ -3,68 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aplikasi Kontrol Manajemen Camat Dumai Kota</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" type="image/png" href="assets/img/dumai.png">
+  <title>Portal Kecamatan Dumai Kota</title>
 
-  <!-- Link untuk font Roboto -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-  <script type="module" src="js/app.js"></script>
-  <!-- SimpleMDE (Markdown Editor) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-  <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+  <!-- Global & Component CSS -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="components/header/header.css">
+  <link rel="stylesheet" href="components/footer/footer.css">
 </head>
+
 <body>
-  <!-- HEADER -->
-  <header class="header">
-    <div class="logo-group">
-      <img src="assets/img/dumai.png" alt="Logo Dumai" class="logo-left">
-      <img src="assets/img/dumai_idaman.png" alt="Logo Dumai Idaman" class="logo-center">
-      <img src="assets/img/asn.png" alt="Logo ASN" class="logo-right">
+  <header></header>
+
+  <main class="container">
+    <div class="card">
+      <h2>Selamat Datang di Portal Kecamatan Dumai Kota</h2>
+      <p>Platform resmi pelayanan dan informasi bagi seluruh warga, ASN, serta perangkat kelurahan di wilayah Kecamatan Dumai Kota.</p>
     </div>
-    <div id="user-info" class="user-info"></div>
-  </header>
 
-  <!-- LOGIN SECTION -->
-  <div id="login-section">
-    <h2>Login Pengguna</h2>
-    <input type="text" id="username" placeholder="Username" required>
-    <input type="password" id="password" placeholder="Password" required>
-    <button id="login-btn">Masuk</button>
-    <p id="login-status"></p>
-  </div>
+    <div class="module-grid">
+      <a href="modules/agenda/agenda.html" class="btn">Agenda</a>
+      <a href="modules/disposisi/disposisi.html" class="btn">Disposisi</a>
+      <a href="modules/nota_dinas/nota_dinas.html" class="btn">Nota Dinas</a>
+      <a href="modules/login/login.html" class="btn">Login</a>
+      <a href="modules/print/print.js" class="btn">Print Tools</a>
+    </div>
+  </main>
 
-  <!-- NAVIGATION MENU -->
-  <nav class="menu hidden" id="main-menu">
-    <button data-page="home">Beranda</button>
-    <button data-page="disposisi">Disposisi</button>
-    <button data-page="notadinas">Nota Dinas</button>
-    <button data-page="surattugas">Surat Tugas</button>
-    <button data-page="agenda">Agenda</button>
-    <button data-page="export">Export/Import</button>
-    <button data-page="logout">Keluar</button>
-  </nav>
+  <footer></footer>
 
-  <main id="app"></main>
-
-  <!-- FOOTER -->
-  <footer id="footer-quote">
-    <div id="footer-sign">💬 <b>Quotes by Camat Dumai Kota</b></div>
-    <div id="daily-quote" class="quote-text"></div>
-    <div id="datetime"></div>
-  </footer>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const u = localStorage.getItem('user');
-      if(u) {
-        document.getElementById('login-section').style.display = 'none';
-        document.getElementById('main-menu').classList.remove('hidden');
-      }
-    });
-  </script>
+  <!-- JS Layout Loader -->
+  <script src="js/layout/layout.js"></script>
 </body>
 </html>

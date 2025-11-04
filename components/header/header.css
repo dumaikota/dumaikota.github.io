@@ -1,0 +1,66 @@
+/* Header Styling */
+header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 15px;
+  border-bottom: 4px solid var(--accent-color);
+  font-family: var(--font-main);
+}
+
+.header-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.header-logos {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo {
+  height: 55px;
+  width: 55px;
+  object-fit: contain;
+}
+
+.header-title {
+  flex: 1;
+  text-align: right;
+}
+
+.header-title h1 {
+  margin: 0;
+  font-size: 1.4em;
+  font-weight: 700;
+  font-family: 'Noto Sans';
+}
+
+.header-title p {
+  margin: 0;
+  font-size: 0.9em;
+  font-weight: 400;
+  color: #e0e0e0;
+}
+
+.navbar {
+  margin-top: 10px;
+  text-align: center;
+  background: var(--secondary-color);
+  border-radius: 4px;
+  padding: 8px 0;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: 600;
+  font-family: var(--font-main);
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}

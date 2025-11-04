@@ -1,0 +1,15 @@
+footer {
+  background-color: var(--primary-color);
+  color: white;
+  text-align: center;
+  padding: 15px;
+  font-family: var(--font-main);
+  margin-top: 40px;
+}
+
+#quote-box {
+  margin-top: 10px;
+  font-style: italic;
+  font-size: 0.9em;
+  color: #e0e0e0;
+}
