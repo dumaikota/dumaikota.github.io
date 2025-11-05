@@ -110,3 +110,11 @@
 #logout-btn:hover {
   background: #a3001f;
 }
+
+/* ===== FINAL LOGO SIZE FIX ===== */
+.site-header .header-logos img.logo {
+  width: 60px !important;
+  height: auto !important;
+  object-fit: contain !important;
+  max-height: 65px !important;
+}
