@@ -1,11 +1,3 @@
-// ========== Footer Quotes Kecamatan Dumai Kota ==========
-
-// Auto-update tahun footer
-document.addEventListener("DOMContentLoaded", () => {
-  const yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-});
-
 // Daftar kutipan inspiratif, ASN berAKHLAK, humor ringan, dan semangat kelurahan
 const quotes = [
   // --- Motivasi & Pelayanan Publik ---
@@ -137,5 +129,8 @@ function updateQuote() {
   }
 }
 
+// Update kutipan pada halaman pertama kali dimuat
 updateQuote();
+
+// Set interval untuk mengganti kutipan setiap 5 menit
 setInterval(updateQuote, 300000);
