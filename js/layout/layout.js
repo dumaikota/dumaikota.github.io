@@ -1,5 +1,5 @@
 // ===========================================
-// Layout Loader + Auth Middleware (FIXED)
+// Layout Loader + Auth Middleware (FINAL FIX)
 // Barang Baru Rasa Lama — Kecamatan Dumai Kota
 // ===========================================
 
@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const path = window.location.pathname;
   const isLoginPage = path.includes("/modules/login/login.html");
 
-  // ========== Proteksi Login Umum ==========
+  // ====== Proteksi Login Umum ======
   const username = localStorage.getItem("username");
   const role = localStorage.getItem("role");
 
@@ -21,18 +21,14 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
   } else if (isLoginPage) {
-    // Jika sudah login, dan membuka login.html, arahkan ke beranda
     window.location.href = "../../index.html";
     return;
   }
 
-  // ========== Fungsi: tentukan path relatif ==========
-  const getPrefix = () => {
-    return path.includes("/modules/") ? "../../components/" : "./components/";
-  };
-  const prefix = getPrefix();
+  // ====== Path Relatif untuk Komponen ======
+  const prefix = path.includes("/modules/") ? "../../components/" : "./components/";
 
-  // ========== Muat Header dan Footer ==========
+  // ====== Muat Header dan Footer (FIX selector) ======
   const loadComponent = (selector, filePath) => {
     fetch(filePath)
       .then(res => {
@@ -49,10 +45,11 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch(err => console.error("❌ Layout Error:", err));
   };
 
-  loadComponent("header", prefix + "header/header.html");
-  loadComponent("footer", prefix + "footer/footer.html");
+  // ===== FIXED =====
+  loadComponent("#header", prefix + "header/header.html");
+  loadComponent("#footer", prefix + "footer/footer.html");
 
-  // ========== Setup Username & Logout ==========
+  // ====== Setup Username & Logout ======
   function setupUserUI() {
     const display = localStorage.getItem("displayName") || localStorage.getItem("role") || "Pengguna";
     const usernameEl = document.getElementById("username-display");
@@ -73,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // ========== Muat Quotes & Jam Footer ==========
+  // ====== Muat Quotes & Jam Footer ======
   function loadQuotes(prefix) {
     const script = document.createElement("script");
     script.src = prefix + "footer/quotes.js";
@@ -81,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(script);
   }
 
-  // ========== Proteksi Role Berdasarkan Meta ==========
+  // ====== Proteksi Role Berdasarkan Meta ======
   function checkAllowedRoles() {
     const meta = document.querySelector('meta[name="allowed-roles"]');
     if (!meta) return;
@@ -98,6 +95,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Tunggu 300ms agar meta dan header/footer terpasang
   setTimeout(checkAllowedRoles, 300);
 });
